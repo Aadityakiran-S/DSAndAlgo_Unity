@@ -181,7 +181,7 @@ public class CustomDoublyLinkedList
         int i = Length - 1; DoublyLinkedListEntry current = _tail, previous = null, next = null;
         while (i >= 0)
         {
-            if (i == Length)    //Condition for moving tail to head
+            if (i == Length - 1)    //Condition for moving tail to head
             {
                 current.nextEntry = current.previousEntry;
                 current.previousEntry = null;
@@ -202,8 +202,8 @@ public class CustomDoublyLinkedList
             }
 
             //Storing variables to use in next loop
-            previous = current.nextEntry;
-            next = current;
+            previous = current.nextEntry;   //next entry is pointing to what's behind it. So that's prev
+            next = current;     //
             current = previous;
 
             i--;
