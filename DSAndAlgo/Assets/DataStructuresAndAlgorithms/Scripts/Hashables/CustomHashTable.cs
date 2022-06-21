@@ -1,6 +1,6 @@
-using System.Collections.Generic;
+using System;
 using System.Linq;
-using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class CustomHashTable
@@ -11,7 +11,6 @@ public class CustomHashTable
     public struct HashColumn
     {
         public bool isHashValid;
-        public int hash;
         public LinkedList<HashCell> hashCellList;
     }
 
@@ -24,12 +23,12 @@ public class CustomHashTable
 
     #endregion
 
-    [SerializeField] private readonly List<HashColumn> _hashTable;
-    [SerializeField] private int _maxNumberOfShelves;
+    private readonly HashColumn[] _hashTable;
+    private int _maxNumberOfShelves;   //It's better if this is a prime number to prevent collisions
 
     public CustomHashTable(int size)
     {
-        _hashTable = new List<HashColumn>(size);
+        _hashTable = new HashColumn[size];
         _maxNumberOfShelves = size;
     }
 
@@ -37,84 +36,90 @@ public class CustomHashTable
 
     public void AddHashCell(string key, float value)
     {
-        //If a duplicate key is entered, returning out
-        if (_hashTable.Any(x => x.hashCellList.Any(y => y.key == key)))
-        {
-            Debug.LogWarning("The key: " + key + " you have entered is a duplicate \n Try entering a unique key");
-            return;
-        }
-
         int hash = CreateHash(key);
-        HashColumn hashColumn;
-        HashCell hashCell = new HashCell
+        if (_hashTable[hash].hashCellList is null)    //given key corresponds to unique hash
         {
-            key = key,
-            value = value
-        };
+            HashColumn hashColumn;
+            HashCell hashCell = new HashCell
+            {
+                key = key,
+                value = value
+            };
 
-        //Collision occurs and we need to add to existing hashColumn
-        if (_hashTable.Any(x => x.hash == hash))
-        {
-            hashColumn = _hashTable.FirstOrDefault(x => x.hash == hash);
-            hashColumn.hashCellList.AddLast(hashCell);
-            Debug.LogWarning("Hash Collission has occured");
-        }
-        //No collision, create new hashColumn
-        else
-        {
             LinkedList<HashCell> hashCellList = new LinkedList<HashCell>();
             hashCellList.AddLast(hashCell);
             hashColumn = InitializeHashColumn(hash, hashCellList);
-            _hashTable.Add(hashColumn);
+            _hashTable[hash] = hashColumn;
+
+        }
+        else    //Hash is not unique => collission has occured
+        {
+            if (_hashTable[hash].hashCellList.Any(x => x.key == key)) //Given key is a duplicate
+            {
+                UnityEngine.Debug.LogWarning("The key: " + key + " you have entered is a duplicate \n Try entering a unique key");
+                return;
+            }
+            else    //Given key is unique even though colission has occured
+            {
+                HashCell hashCell = new HashCell
+                {
+                    key = key,
+                    value = value
+                };
+
+                _hashTable[hash].hashCellList.AddLast(hashCell);
+
+                UnityEngine.Debug.LogWarning("Hash collision has occured");
+            }
         }
     }
 
     public float GetValue_ForGivenKey(string key)
     {
         int hashFromGivenKey = CreateHash(key);
-        HashColumn hashColumn = _hashTable.FirstOrDefault(x => x.hash == hashFromGivenKey);
-
-        if (hashColumn.isHashValid == false)
+        if(_hashTable[hashFromGivenKey].hashCellList == null)    //Key doesn't correspond to hash
         {
-            Debug.LogError("Entered key does not correspond to a hash in the table");
+            UnityEngine.Debug.LogError("Entered key does not correspond to a hash in the table");
             return default;
         }
-        else
+        else    //Either hashColumn has the key or cell list within it has it
         {
-            return hashColumn.hashCellList.FirstOrDefault(x => x.key == key).value;
+            //This will be O(n) in the worst case only
+            return _hashTable[hashFromGivenKey].hashCellList.FirstOrDefault(x => x.key == key).value; 
         }
     }
 
     public HashColumn RemoveEntireColumn(string key)
     {
         int hashFromGivenKey = CreateHash(key);
-        HashColumn hashColumn = _hashTable.FirstOrDefault(x => x.hash == hashFromGivenKey);
 
-        if (hashColumn.isHashValid == false)
+        if (_hashTable[hashFromGivenKey].hashCellList == null)   //Nothing in that column, no sense in removing
         {
-            Debug.LogError("Entered key does not correspond to a hash in the table");
+            UnityEngine.Debug.LogError("Entered key does not correspond to a hash in the table");
             return default;
         }
-        else
+        else //Key corresponds to a column, so that can be deleted
         {
-            _hashTable.Remove(hashColumn);
-            return hashColumn;
+            HashColumn column = _hashTable[hashFromGivenKey];
+            _hashTable[hashFromGivenKey] = new HashColumn();
+            return column;
         }
     }
 
+    //O(1) in case of no collisions
     public HashCell RemoveHashCell(string key)
     {
         int hashFromGivenKey = CreateHash(key);
-        HashColumn hashColumn = _hashTable.FirstOrDefault(x => x.hash == hashFromGivenKey);
+        HashColumn hashColumn = _hashTable[hashFromGivenKey];
 
-        if (hashColumn.isHashValid == false)
+        if (hashColumn.hashCellList.Count == 0)   //Hash doesn't even exist
         {
-            Debug.LogError("Entered jey does not correspond to a hash in the table");
+            UnityEngine.Debug.LogError("Entered key does not correspond to a hash in the table");
             return default;
         }
-        else
+        else    //Hash exists but need to find which cell has the key
         {
-            if (hashColumn.hashCellList.Any(x => x.key == key))
+            if (hashColumn.hashCellList.Any(x => x.key == key)) //O(n) in case of any collisions other O(1)
             {
                 HashCell cellToRemove = hashColumn.hashCellList.FirstOrDefault(x => x.key == key);
                 hashColumn.hashCellList.Remove(cellToRemove);
@@ -122,7 +127,7 @@ public class CustomHashTable
             }
             else
             {
-                Debug.LogError("Entered key does not exist in hash table");
+                UnityEngine.Debug.LogError("Entered key does not exist in hash table");
                 return default;
             }
         }
@@ -134,16 +139,19 @@ public class CustomHashTable
 
         foreach (HashColumn column in _hashTable)
         {
-            foreach (HashCell cell in column.hashCellList)
+            if(column.hashCellList != null)
             {
-                keyList.Add(cell.key);
+                foreach (HashCell cell in column.hashCellList)
+                {
+                    keyList.Add(cell.key);
+                }
             }
         }
 
         return keyList;
     }
 
-    //GetAllKeys and values function
+    //TODO: write a function that returns all keys and values
 
     #endregion
 
@@ -178,7 +186,6 @@ public class CustomHashTable
         HashColumn hashColumn = new HashColumn
         {
             isHashValid = true,
-            hash = hash,
             hashCellList = hashCellList
         };
 
