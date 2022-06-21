@@ -6,7 +6,7 @@ public class CustomHashTableImplementation : MonoBehaviour
 {
     [SerializeField] private CustomHashTable hashTable;
 
-    private void Start()
+    private void Awake()
     {
         ////Add relevant data here   
         hashTable = new CustomHashTable(4);
@@ -18,22 +18,19 @@ public class CustomHashTableImplementation : MonoBehaviour
         hashTable.AddHashCell("Adarsh", 80f);
     }
 
-    private void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        hashTable.AddHashCell("Suvaneethan", 10f);
+        Debug.Log("Key: Suvaneethan has value: " + hashTable.GetValue_ForGivenKey("Suvaneethan"));
+
+        List<string> keyList = hashTable.GetAllKeys();
+        foreach (var item in keyList)
         {
-            hashTable.AddHashCell("Suvaneethan", 10f);
-            Debug.Log("Key: Suvaneethan has value: " + hashTable.GetValue_ForGivenKey("Suvaneethan"));
-
-            List<string> keyList = hashTable.GetAllKeys();
-            foreach (var item in keyList)
-            {
-                Debug.Log(item);
-            }
-
-            hashTable.AddHashCell("Midhun", 10f);
-            Debug.Log("Key: Midhun has value: " + hashTable.GetValue_ForGivenKey("Midhun"));
+            Debug.Log(item);
         }
+
+        hashTable.AddHashCell("Midhun", 10f);
+        Debug.Log("Key: Midhun has value: " + hashTable.GetValue_ForGivenKey("Midhun"));
     }
 }
 

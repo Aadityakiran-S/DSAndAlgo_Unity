@@ -62,7 +62,6 @@ public class CustomArray2
         return entryToPop;
     }
 
-    //TODO: Check if this is working
     public Object Delete(int index)
     {
         CommonMethods.CheckIfIndexInBounds(index, Length);

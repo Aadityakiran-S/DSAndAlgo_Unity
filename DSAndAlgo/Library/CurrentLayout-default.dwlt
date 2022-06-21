@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: Project
   m_RootView: {fileID: 4}
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 631
     width: 527
     height: 316
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 276, y: 192}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
-  controlID: 186
+  controlID: 103
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -97,7 +97,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 18004, y: 14042}
   vertical: 1
-  controlID: 93
+  controlID: 108
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
-  controlID: 94
+  controlID: 109
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 14003, y: 14042}
   vertical: 1
-  controlID: 95
+  controlID: 110
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 69
+  controlID: 111
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -267,8 +267,8 @@ MonoBehaviour:
     y: 0
     width: 358
     height: 479
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 23}
   m_Panes:
   - {fileID: 23}
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_MinSize: {x: 333, y: 271}
   m_MaxSize: {x: 14003, y: 10021}
   vertical: 0
-  controlID: 96
+  controlID: 177
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -599,10 +599,10 @@ MonoBehaviour:
       categories: []
       parentId: 
       parentUniqueId: 
-    - id: 1004
-      uniqueId: '[EditMode][D:/UnityProjects/Personal/Projects/DSAndAlgo_Unity/DSAndAlgo/Library/ScriptAssemblies/EditMode.dll][suite]'
-      name: EditMode.dll
-      fullName: D:/UnityProjects/Personal/Projects/DSAndAlgo_Unity/DSAndAlgo/Library/ScriptAssemblies/EditMode.dll
+    - id: 1007
+      uniqueId: '[EditModeTests][D:/UnityProjects/Personal/Projects/DSAndAlgo_Unity/DSAndAlgo/Library/ScriptAssemblies/EditModeTests.dll][suite]'
+      name: EditModeTests.dll
+      fullName: D:/UnityProjects/Personal/Projects/DSAndAlgo_Unity/DSAndAlgo/Library/ScriptAssemblies/EditModeTests.dll
       resultStatus: 0
       duration: 0
       messages: 
@@ -615,10 +615,10 @@ MonoBehaviour:
       categories: []
       parentId: 1000
       parentUniqueId: '[DSAndAlgo][suite]'
-    - id: 1001
-      uniqueId: EditMode.dll/[EditMode][FirstEditModeTest][suite]
-      name: FirstEditModeTest
-      fullName: FirstEditModeTest
+    - id: 1005
+      uniqueId: EditModeTests.dll/[EditModeTests][CustomArray2EditModeTest][suite]
+      name: CustomArray2EditModeTest
+      fullName: CustomArray2EditModeTest
       resultStatus: 0
       duration: 0
       messages: 
@@ -629,12 +629,12 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1004
-      parentUniqueId: '[EditMode][D:/UnityProjects/Personal/Projects/DSAndAlgo_Unity/DSAndAlgo/Library/ScriptAssemblies/EditMode.dll][suite]'
-    - id: 1002
-      uniqueId: EditMode.dll/FirstEditModeTest/[EditMode][FirstEditModeTest.FirstEditModeTestSimplePasses]
-      name: FirstEditModeTestSimplePasses
-      fullName: FirstEditModeTest.FirstEditModeTestSimplePasses
+      parentId: 1007
+      parentUniqueId: '[EditModeTests][D:/UnityProjects/Personal/Projects/DSAndAlgo_Unity/DSAndAlgo/Library/ScriptAssemblies/EditModeTests.dll][suite]'
+    - id: 1006
+      uniqueId: EditModeTests.dll/CustomArray2EditModeTest/[EditModeTests][CustomArray2EditModeTest.CustomArray2EditModeTestSimplePasses]
+      name: CustomArray2EditModeTestSimplePasses
+      fullName: CustomArray2EditModeTest.CustomArray2EditModeTestSimplePasses
       resultStatus: 0
       duration: 0
       messages: 
@@ -646,25 +646,8 @@ MonoBehaviour:
       isSuite: 0
       categories:
       - Uncategorized
-      parentId: 1001
-      parentUniqueId: EditMode.dll/[EditMode][FirstEditModeTest][suite]
-    - id: 1003
-      uniqueId: EditMode.dll/FirstEditModeTest/[EditMode][FirstEditModeTest.FirstEditModeTestWithEnumeratorPasses]
-      name: FirstEditModeTestWithEnumeratorPasses
-      fullName: FirstEditModeTest.FirstEditModeTestWithEnumeratorPasses
-      resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1001
-      parentUniqueId: EditMode.dll/[EditMode][FirstEditModeTest][suite]
+      parentId: 1005
+      parentUniqueId: EditModeTests.dll/[EditModeTests][CustomArray2EditModeTest][suite]
     m_ResultText: 
     m_ResultStacktrace: 
     m_TestListState:
@@ -923,7 +906,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 3e3e0000
     m_LastClickedID: 15934
-    m_ExpandedIDs: 00000000004400000244000004440000
+    m_ExpandedIDs: 000000000e4400001044000012440000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -951,7 +934,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000004400000244000004440000
+    m_ExpandedIDs: 000000000e4400001044000012440000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1045,22 +1028,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/DataStructuresAndAlgorithms/Scripts/LinkedLists
+    - Assets/DataStructuresAndAlgorithms/Tests
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/DataStructuresAndAlgorithms/Scripts/LinkedLists
+  - Assets/DataStructuresAndAlgorithms/Tests
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\UnityProjects\Personal\Projects\DSAndAlgo_Unity\DSAndAlgo
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 1a440000
-    m_LastClickedID: 17434
-    m_ExpandedIDs: 0000000000440000024400000444000000ca9a3b
+    m_SelectedIDs: 26440000
+    m_LastClickedID: 17446
+    m_ExpandedIDs: 000000000e4400001044000012440000244400002644000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1088,7 +1071,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000004400000244000004440000
+    m_ExpandedIDs: 000000000e4400001044000012440000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1119,18 +1102,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 2a440000c6470000c4470000d8aa00003a4a000020590000124c000070590000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: MergeSortedArrays
-      m_OriginalName: MergeSortedArrays
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 17458
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 15}
     m_CreateAssetUtility:
@@ -1298,7 +1281,7 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 5a440000
       m_LastClickedID: 0
       m_ExpandedIDs: 62fbffff
       m_RenameOverlay:
@@ -1670,7 +1653,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 62480000
     m_LastClickedID: 18530
-    m_ExpandedIDs: 00000000004400000244000004440000
+    m_ExpandedIDs: 000000000e4400001044000012440000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1698,7 +1681,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000004400000244000004440000
+    m_ExpandedIDs: 000000000e4400001044000012440000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

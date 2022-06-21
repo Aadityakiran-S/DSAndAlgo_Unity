@@ -12,7 +12,7 @@ public class CustomHashTable
     {
         public bool isHashValid;
         public int hash;
-        public List<HashCell> hashCellList;
+        public LinkedList<HashCell> hashCellList;
     }
 
     [System.Serializable]
@@ -56,13 +56,15 @@ public class CustomHashTable
         if (_hashTable.Any(x => x.hash == hash))
         {
             hashColumn = _hashTable.FirstOrDefault(x => x.hash == hash);
-            hashColumn.hashCellList.Add(hashCell);
+            hashColumn.hashCellList.AddLast(hashCell);
             Debug.LogWarning("Hash Collission has occured");
         }
         //No collision, create new hashColumn
         else
         {
-            hashColumn = InitializeHashColumn(hash, new List<HashCell> { hashCell });
+            LinkedList<HashCell> hashCellList = new LinkedList<HashCell>();
+            hashCellList.AddLast(hashCell);
+            hashColumn = InitializeHashColumn(hash, hashCellList);
             _hashTable.Add(hashColumn);
         }
     }
@@ -171,7 +173,7 @@ public class CustomHashTable
         return hash;
     }
 
-    HashColumn InitializeHashColumn(int hash, List<HashCell> hashCellList)
+    HashColumn InitializeHashColumn(int hash, LinkedList<HashCell> hashCellList)
     {
         HashColumn hashColumn = new HashColumn
         {
