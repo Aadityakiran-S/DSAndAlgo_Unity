@@ -4,30 +4,7 @@ using System.Collections.Generic;
 
 public class CustomDoublyLinkedList
 {
-    #region Referances
-
-    [System.Serializable]
-    public class DoublyLinkedListEntry : IDisposable
-    {
-        public Object value;
-        public DoublyLinkedListEntry nextEntry;
-        public DoublyLinkedListEntry previousEntry;
-
-        public DoublyLinkedListEntry(Object value, DoublyLinkedListEntry nextEntry = null, DoublyLinkedListEntry prevEntry = null)
-        {
-            this.value = value;
-            this.nextEntry = nextEntry;
-            this.previousEntry = prevEntry;
-        }
-
-        //Not really required since automatic garbage collection is there in C#
-        public void Dispose()
-        {
-            this.value = null;
-            this.nextEntry = null;
-            this.previousEntry = null;
-        }
-    }
+    #region Referances    
 
     private DoublyLinkedListEntry _head;
     private DoublyLinkedListEntry _tail;
@@ -257,4 +234,27 @@ public class CustomDoublyLinkedList
     }
 
     #endregion   
+}
+
+[System.Serializable]
+public class DoublyLinkedListEntry : IDisposable
+{
+    public Object value;
+    public DoublyLinkedListEntry nextEntry;
+    public DoublyLinkedListEntry previousEntry;
+
+    public DoublyLinkedListEntry(Object value, DoublyLinkedListEntry nextEntry = null, DoublyLinkedListEntry prevEntry = null)
+    {
+        this.value = value;
+        this.nextEntry = nextEntry;
+        this.previousEntry = prevEntry;
+    }
+
+    //Not really required since automatic garbage collection is there in C#
+    public void Dispose()
+    {
+        this.value = null;
+        this.nextEntry = null;
+        this.previousEntry = null;
+    }
 }
