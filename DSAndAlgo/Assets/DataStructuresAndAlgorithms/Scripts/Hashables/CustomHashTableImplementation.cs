@@ -9,7 +9,7 @@ public class CustomHashTableImplementation : MonoBehaviour
     private void Awake()
     {
         ////Add relevant data here   
-        hashTable = new CustomHashTable(4);
+        hashTable = new CustomHashTable(7);
         hashTable.AddHashCell("Aaditya", 100f);
         hashTable.AddHashCell("Midhun", 200f);
         hashTable.AddHashCell("Amal", 150f);

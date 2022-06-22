@@ -202,8 +202,8 @@ public class CustomDoublyLinkedList
             }
 
             //Storing variables to use in next loop
-            previous = current.nextEntry;   //next entry is pointing to what's behind it. So that's prev
-            next = current;     //
+            previous = current.nextEntry;
+            next = current;
             current = previous;
 
             i--;
