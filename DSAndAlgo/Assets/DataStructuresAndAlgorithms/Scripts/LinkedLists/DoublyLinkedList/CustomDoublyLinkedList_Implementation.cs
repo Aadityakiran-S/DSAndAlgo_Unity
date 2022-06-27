@@ -30,14 +30,16 @@ public class CustomDoublyLinkedList_Implementation : MonoBehaviour
         Debug.LogWarning("Head value is: " + _linkedList.Retrieve(0));
         Debug.LogWarning("Tail value is: " + _linkedList.Retrieve(_linkedList.Length - 1));
 
-        //_linkedList.PrintAllValues();
-        //_linkedList.RemoveAt(3);
-        //_linkedList.PrintAllValues();
+        _linkedList.PrintAllValues();
+        _linkedList.RemoveAt(3);
+        _linkedList.PrintAllValues();
 
         _linkedList.PrintAllValues();
-        Debug.LogWarning("##############");
-        CustomDoublyLinkedList reversedList = _linkedList.CavemanReverse();
-        reversedList.PrintAllValues();
+
+        Debug.LogWarning("##############");     //Just adding to give a visual break to the console
+        _linkedList.Reverse();
+
+        _linkedList.PrintAllValues();
 
         //the code below is written to throw exception; Just to check if the execptions I wrote are working as intended
         //Debug.Log("A random value is: " + _linkedList.Retrieve(20));

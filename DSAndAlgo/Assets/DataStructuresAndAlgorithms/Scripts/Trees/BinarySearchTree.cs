@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12,8 +13,6 @@ public class BinarySearchTree
     public int NumberOfLevels { get => _numberOfLevels; private set => _numberOfLevels = value; }
 
     private Hashtable _entriesTable;
-
-    const int SPACECOUNT = 5;
 
     public BinarySearchTree()
     {
@@ -70,6 +69,8 @@ public class BinarySearchTree
             if (currentNode == null)    //Value not found. Reached end
             {
                 isFound = false; toStop = true;
+
+                currentNode = new BSTNode(0, -1, null); //Simply for DEBUG PURPOSE
             }
             else
             {
@@ -78,11 +79,17 @@ public class BinarySearchTree
                     isFound = true; toStop = true;
 
                     //Just something to let me know if it's on the left or right. To see if my tree came out right
-                    if (currentNode.root.left == currentNode)
-                        lOrR = LeftOrRight.Left;
+                    if (currentNode.root == null)    //Root doesn't have a root
+                    {
+                        lOrR = LeftOrRight.Center;  //Neither left or right
+                    }
                     else
-                        lOrR = LeftOrRight.Right;
-
+                    {
+                        if (currentNode.root.left == currentNode)
+                            lOrR = LeftOrRight.Left;
+                        else
+                            lOrR = LeftOrRight.Right;
+                    }
                 }
                 else if (currentNode.Value < value)
                 {
@@ -95,25 +102,96 @@ public class BinarySearchTree
             }
         }
 
-        if (currentNode == null) //Simply for debug purposes
+        IsFoundAtDepth toReturn = new IsFoundAtDepth    //Making something to show position of node DEBUG PURPOSE o/w could have returned just a bool
         {
-            currentNode = new BSTNode(0, -1, null);
-        }
-
-        IsFoundAtDepth toReturn = new IsFoundAtDepth
-        {
+            nodeToReturn = currentNode,
             isFound = isFound,
             depth = currentNode.depth,
-            rightOrLeft = lOrR
+            leftOrRight = lOrR
         };
 
         return toReturn;
     }
 
-    public void PrintTree()
+    //TOFIX: Not working when removing single child. Some referencing problem it seems
+    public IsFoundAtDepth Remove(int value)
     {
-        Print2DUtil(_root, 0);
+        IsFoundAtDepth foundValue = Lookup(value);
+        if (foundValue.nodeToReturn.depth == -1) //Not found
+        {
+            UnityEngine.Debug.LogWarning("You can't delete what you don't already have");
+            return default;
+        }
+
+        BSTNode foundNode = foundValue.nodeToReturn;
+
+        //Found has no children? => Either a root with nothing else or a leaf
+        if (foundNode.left == null && foundNode.right == null)
+        {
+            if (foundNode.root == null)  //If is the root itself
+            {
+                _root = null;
+                UnityEngine.Debug.Log("You have delted the root itself");
+            }
+            else //If is merely a leaf => Delete said node
+            {
+                foundNode.root.DecoupleChild(foundNode);
+            }
+        }
+        else if (foundNode.left != null || foundNode.right != null)   //Found has at least one child
+        {
+            BSTNode nodeToReplace;
+
+            //Exactly 2 children => Replace with min value in right sub tree or max value in left
+            if (foundNode.left != null && foundNode.right != null)
+            {
+                nodeToReplace = FindMinNodeInRightSubTree(foundNode);
+            }
+            else //Exactly one child => Delete parent, replace with child
+            {
+                if (foundNode.left == null)
+                {
+                    nodeToReplace = foundNode.right;
+                }
+                else
+                {
+                    nodeToReplace = foundNode.left;
+                }
+            }
+
+            ///How to replace really? (Also, replace the variable in case you're removing root)
+            /// Replacement occurs when all refs to the objct are gone
+            /// => the root of it has to loose ref to it
+            /// and the children from it have to ref new parent
+            /// 
+
+            if(foundNode == Root) //If found node is root, then new root is nodeToReplace
+            {
+                Root = nodeToReplace;
+            }
+
+            var rootOfFoundNode = foundNode.root;
+            if(rootOfFoundNode != null) //That is, found node is not root
+            {
+                ///What do we have to do?
+                /// Replace the foundNode in the root with the temp node
+                /// Replace temp node's root with root node
+
+
+            }
+            else //Found node is root itself
+            {
+                ///What to do in this case? 
+                /// 
+            }
+        }
+
+        return foundValue;
     }
+
+    //DOLATER: Create function to find the next largest element in the tree.
+    //DOLATER: Create function to find the next smallest element in the tree.
+    //DOLATER: Make a method to convert this tree to an ordered linked list.
 
     #endregion
 
@@ -143,32 +221,23 @@ public class BinarySearchTree
         }
     }
 
-    private void Print2DUtil(BSTNode root, int space)
+    private BSTNode FindMinNodeInRightSubTree(BSTNode nodeToReplace)
     {
-        // Nothing in tree at all => Nothing to print
-        if (root == null)
+        BSTNode nodeToReturn = null; bool toStop = false;
+        while (!toStop)
         {
-            UnityEngine.Debug.LogWarning("Your tree is empty");
-            return;
+            if (nodeToReplace.left == null) //If there's no left for this node, then it iteslf if min
+            {
+                toStop = true;
+                nodeToReturn = nodeToReplace;
+            }
+            else //Otherwise, simply keep moving left
+            {
+                nodeToReplace = nodeToReplace.left;
+            }
         }
 
-        // Increase distance between levels  
-        space += SPACECOUNT;
-
-        // Process right child first  
-        Print2DUtil(root.right, space);
-
-        // Print current node after space  
-        // count  
-        UnityEngine.Debug.Log("\n");
-        for (int i = SPACECOUNT; i < space; i++)
-        {
-            UnityEngine.Debug.Log(" ");
-        }
-        UnityEngine.Debug.Log(root.Value + "\n");
-
-        // Process left child  
-        Print2DUtil(root.left, space);
+        return nodeToReturn;
     }
 
     #endregion
@@ -196,14 +265,37 @@ public class BSTNode
         this.left = null;
         this.right = null;
     }
+
+    public void DecoupleChild(BSTNode childNode)
+    {
+        if (childNode == this.left)
+        {
+            this.left = null;
+        }
+        else if (childNode == this.right)
+        {
+            this.right = null;
+        }
+        else //Neither right nor left
+        {
+            UnityEngine.Debug.LogError("You are trying to decouple a child that is not a child of a node. What the hell bro?");
+            return;
+        }
+    }
+
+    public void ReplaceChild(BSTNode childToReplace)
+    {
+
+    }
 }
 
 [System.Serializable]
 public struct IsFoundAtDepth
 {
+    public BSTNode nodeToReturn;
     public bool isFound;
     public int depth;
-    public LeftOrRight rightOrLeft;
+    public LeftOrRight leftOrRight;
 }
 
 [System.Serializable]

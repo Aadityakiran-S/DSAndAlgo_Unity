@@ -8,25 +8,6 @@ public class CustomSinglyLinkedList2
 {
     #region Referances
 
-    [System.Serializable]
-    public class SinglyLinkedListEntry : System.Object, IDisposable
-    {
-        public System.Object value;
-        public System.Object nextEntry;
-
-        public SinglyLinkedListEntry(System.Object value, System.Object nextEntry = null)
-        {
-            this.value = value;
-            this.nextEntry = nextEntry;
-        }
-
-        public void Dispose()
-        {
-            this.value = null;
-            this.nextEntry = null;
-        }
-    }
-
     private SinglyLinkedListEntry _head;
     private SinglyLinkedListEntry _tail;
 
@@ -178,4 +159,23 @@ public class CustomSinglyLinkedList2
     }
 
     #endregion   
+}
+
+[System.Serializable]
+public class SinglyLinkedListEntry : System.Object, IDisposable
+{
+    public System.Object value;
+    public System.Object nextEntry;
+
+    public SinglyLinkedListEntry(System.Object value, System.Object nextEntry = null)
+    {
+        this.value = value;
+        this.nextEntry = nextEntry;
+    }
+
+    public void Dispose()
+    {
+        this.value = null;
+        this.nextEntry = null;
+    }
 }

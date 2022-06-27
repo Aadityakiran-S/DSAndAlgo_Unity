@@ -32,15 +32,21 @@ public class BinarySearchTree_Implementation : MonoBehaviour
         //_tree.Insert(170);
         //_tree.Insert(15);
         //_tree.Insert(1);
+        //_tree.Insert(14);
+        //_tree.Insert(16);
+        //_tree.Insert(0);
+        //_tree.Insert(8);
     }
 
+    //Testing for Insert here, test for remove in Unit Tests
     private void Start()
     {
-        //_tree.PrintTree();
-
         IsFoundAtDepth foundAtDepth = _tree.Lookup(_entryToLookUp);
         Debug.Log("Entry: " + _entryToLookUp + " is found? " + foundAtDepth.isFound + " at depth " + foundAtDepth.depth +
-            " on the " + foundAtDepth.rightOrLeft);
+            " on the " + foundAtDepth.leftOrRight + " of " + foundAtDepth.nodeToReturn.root.Value);
+
+        Debug.Log("To the right of entry is " + foundAtDepth.nodeToReturn.right);
+        Debug.Log("To the left of entry is " + foundAtDepth.nodeToReturn.left);
     }
 
     #endregion

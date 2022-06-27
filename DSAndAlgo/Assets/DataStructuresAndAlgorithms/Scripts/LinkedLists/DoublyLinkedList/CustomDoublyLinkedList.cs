@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class CustomDoublyLinkedList
 {
-    #region Referances    
+    #region Referances
 
     private DoublyLinkedListEntry _head;
     private DoublyLinkedListEntry _tail;
@@ -152,7 +152,6 @@ public class CustomDoublyLinkedList
         return entryToRetrieve.value;
     }
 
-    //TODO: Fix this. It's not working right
     public void Reverse()
     {
         int i = Length - 1; DoublyLinkedListEntry current = _tail, previous = null, next = null;
@@ -179,8 +178,8 @@ public class CustomDoublyLinkedList
             }
 
             //Storing variables to use in next loop
-            previous = current.nextEntry;
-            next = current;
+            previous = current.nextEntry;   //next entry is pointing to what's behind it. So that's prev
+            next = current;     //
             current = previous;
 
             i--;
