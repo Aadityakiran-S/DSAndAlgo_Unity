@@ -246,8 +246,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1172602401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 119d394360200b745a1358e591d9df2a, type: 3}
+  m_Script: {fileID: 11500000, guid: f5b3b10f62880644a801135c84c13751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entryToLookUp: 20
-  _valuesToEnter: 09000000040000000600000014000000aa0000000f00000001000000
+  _stringToReverse: Hello
+  _stringToCheckIfPallindrome: kayap
+  _decimalToConvertToBinary: 4
+  _sumFromNumber: 13
