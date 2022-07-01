@@ -49,12 +49,12 @@ public class CustomStackUsingLinkedList
         _tail = valueToPop.previousEntry;
         _length--;
 
-        return valueToPop.value;
+        return valueToPop.Value;
     }
 
     public Object Peek()
     {
-        return _tail.value;
+        return _tail.Value;
     }
 
     #endregion

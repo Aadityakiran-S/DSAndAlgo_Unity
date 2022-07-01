@@ -149,10 +149,11 @@ public class CustomDoublyLinkedList
             i++;
         }
 
-        return entryToRetrieve.value;
+        return entryToRetrieve.Value;
     }
 
-    public void Reverse()
+    //What sort of reverse is this? Such a stupid brute force way to reverse
+    public void Reverse_BruteForce()
     {
         int i = Length - 1; DoublyLinkedListEntry current = _tail, previous = null, next = null;
         while (i >= 0)
@@ -186,22 +187,33 @@ public class CustomDoublyLinkedList
         }
     }
 
-    public CustomDoublyLinkedList CavemanReverse()
+    public void Reverse_Iterative()
     {
-        CustomDoublyLinkedList reversedLinkedList = new CustomDoublyLinkedList(_head.value);
+        DoublyLinkedListEntry entry = _tail;    //Starting from the bottom (now we here! ;))
+        _head = _tail;  //Now the head is going to be the tail
 
-        int i = 0; DoublyLinkedListEntry entry = _head;
-        while(i < Length - 1)
+        while (true)
         {
-            entry = entry.nextEntry;
-            reversedLinkedList.Append(entry.value);
-            i++;
-        }
+            //Iterative case
+            entry = FlipPointersOfEntry(entry).nextEntry; //Tail's next entry is the one behind it now. So we point to that and continue
 
-        return reversedLinkedList;
+            //Base case
+            if (entry.previousEntry == null) //We've reached head
+            {
+                _tail = entry; // the tail is going to be what was previously the head
+                FlipPointersOfEntry(entry);
+                return;
+            }
+        }
     }
 
-    public void PrintAllValues()
+    public void  Reverse_Recursive()
+    {
+        _head = _tail;
+        RecursivelyFlipEntries(_head);
+    }
+
+    public void PrintAllValues_BruteForce()
     {
         int i = 0; DoublyLinkedListEntry currentEntry = _head, nextEntry = _head, previousEntry = _head;
         while (i < Length)
@@ -213,38 +225,93 @@ public class CustomDoublyLinkedList
             if (nextEntry == null)
             {
                 nextEntry = new DoublyLinkedListEntry("null", null);
-                UnityEngine.Debug.Log("Entry at " + i + " is " + currentEntry.value + " pointing from " + "\n" + currentEntry.previousEntry.value +
-                    " pointing to " + nextEntry.value + " that is we've reached the tail");
+                UnityEngine.Debug.Log("Entry at " + i + " is " + currentEntry.Value + " pointing from " + currentEntry.previousEntry.Value +
+                    " pointing to " + nextEntry.Value + " that is we've reached the tail");
             }
             else if (previousEntry == null)
             {
                 previousEntry = new DoublyLinkedListEntry("null");
-                UnityEngine.Debug.Log("Entry at " + i + " is " + currentEntry.value + " \n pointing from: " + previousEntry.value +
-                    " \n that's how we know we've just started & \n pointing to: " + currentEntry.nextEntry.value);
+                UnityEngine.Debug.Log("Entry at " + i + " is " + currentEntry.Value + " pointing from: " + previousEntry.Value +
+                    " that's how we know we've just started & pointing to: " + currentEntry.nextEntry.Value);
             }
             else //Both current and previous entries are not null. Means we're in the middle of the list
             {
-                UnityEngine.Debug.Log("Entry at " + i + " is " + currentEntry.value + " \n pointing from " + currentEntry.previousEntry.value
-                    + " \n pointing to: " + currentEntry.nextEntry.value);
+                UnityEngine.Debug.Log("Entry at " + i + " is " + currentEntry.Value + " pointing from " + currentEntry.previousEntry.Value
+                    + " pointing to: " + currentEntry.nextEntry.Value);
             }
 
             i++;
         }
     }
 
-    #endregion   
+    public void PrintAllValues_Iterative()
+    {
+        DoublyLinkedListEntry entry = _head; //Starting from head
+        UnityEngine.Debug.Log("from null " + " at " + entry.Value + " next: " + entry.nextEntry.Value);
+
+        while (true)
+        {
+            entry = entry.nextEntry;
+            if (entry.nextEntry == null)    //We've reached tail => Print once and exit
+            {
+                UnityEngine.Debug.Log("prev: " + entry.previousEntry.Value + " at " + entry.Value + " to null");
+                return;
+            }
+
+            UnityEngine.Debug.Log("prev: " + entry.previousEntry.Value + " at " + entry.Value + " next: " + entry.nextEntry.Value);
+        }
+    }
+
+    public void PrintAllValues_Recursive()
+    {
+        
+    }
+
+    #endregion
+
+    #region Private Functions
+
+    private DoublyLinkedListEntry FlipPointersOfEntry(DoublyLinkedListEntry entry)
+    {
+        DoublyLinkedListEntry tempEntry = new DoublyLinkedListEntry(entry.Value, entry.nextEntry, entry.previousEntry);
+
+        entry.nextEntry = tempEntry.previousEntry;
+        entry.previousEntry = tempEntry.nextEntry;
+
+        tempEntry.Dispose();
+        return entry;
+    }
+
+    private DoublyLinkedListEntry RecursivelyFlipEntries(DoublyLinkedListEntry entry)
+    {
+        //Base case: Reaching head from behind
+        if(entry.previousEntry == null)
+        {
+            entry = FlipPointersOfEntry(entry);
+            _tail = entry;
+            return entry;
+        }
+
+        //Flipping entries and so the next entry to flip will be the prev entry which is entry.nxt (get it?)
+        entry = FlipPointersOfEntry(entry);
+        return RecursivelyFlipEntries(entry.nextEntry);//Starting from last, going back after flipping next entry to consider is entry.nxt
+    }
+
+    #endregion
 }
 
 [System.Serializable]
 public class DoublyLinkedListEntry : IDisposable
 {
-    public Object value;
+    private Object _value;
+    public object Value { get => _value; private set => this._value = value; }
+
     public DoublyLinkedListEntry nextEntry;
     public DoublyLinkedListEntry previousEntry;
 
     public DoublyLinkedListEntry(Object value, DoublyLinkedListEntry nextEntry = null, DoublyLinkedListEntry prevEntry = null)
     {
-        this.value = value;
+        this.Value = value;
         this.nextEntry = nextEntry;
         this.previousEntry = prevEntry;
     }
@@ -252,7 +319,7 @@ public class DoublyLinkedListEntry : IDisposable
     //Not really required since automatic garbage collection is there in C#
     public void Dispose()
     {
-        this.value = null;
+        this.Value = null;
         this.nextEntry = null;
         this.previousEntry = null;
     }
