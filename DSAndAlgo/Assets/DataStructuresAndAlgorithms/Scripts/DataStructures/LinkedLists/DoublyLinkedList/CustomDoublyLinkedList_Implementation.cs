@@ -34,7 +34,7 @@ public class CustomDoublyLinkedList_Implementation : MonoBehaviour
         _linkedList.PrintAllValues_Iterative();
         _linkedList.RemoveAt(2);
         Debug.LogWarning("Print after removing");
-        _linkedList.PrintAllValues_Iterative();
+        _linkedList.PrintAllValues_BruteForce();
 
         Debug.LogWarning("##############");     //Just adding to give a visual break to the console
 
@@ -43,7 +43,8 @@ public class CustomDoublyLinkedList_Implementation : MonoBehaviour
         _linkedList.Reverse_Iterative();
         _linkedList.Reverse_Recursive();
 
-        _linkedList.PrintAllValues_Iterative();
+        _linkedList.PrintAllValues_Recursive();
+        _linkedList.PrintAllValues_ReverseRecursive();
 
         //the code below is written to throw exception; Just to check if the execptions I wrote are working as intended
         //Debug.Log("A random value is: " + _linkedList.Retrieve(20));

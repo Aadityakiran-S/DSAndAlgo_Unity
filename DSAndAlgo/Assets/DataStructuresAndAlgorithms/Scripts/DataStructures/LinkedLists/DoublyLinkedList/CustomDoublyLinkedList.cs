@@ -207,7 +207,7 @@ public class CustomDoublyLinkedList
         }
     }
 
-    public void  Reverse_Recursive()
+    public void Reverse_Recursive()
     {
         _head = _tail;
         RecursivelyFlipEntries(_head);
@@ -264,8 +264,13 @@ public class CustomDoublyLinkedList
 
     public void PrintAllValues_Recursive()
     {
-        
+        RecursivePrint(_head);
     }
+
+    public void PrintAllValues_ReverseRecursive()
+    {
+        ReverseRecursivePrint(_head);
+    }   
 
     #endregion
 
@@ -285,7 +290,7 @@ public class CustomDoublyLinkedList
     private DoublyLinkedListEntry RecursivelyFlipEntries(DoublyLinkedListEntry entry)
     {
         //Base case: Reaching head from behind
-        if(entry.previousEntry == null)
+        if (entry.previousEntry == null)
         {
             entry = FlipPointersOfEntry(entry);
             _tail = entry;
@@ -295,6 +300,46 @@ public class CustomDoublyLinkedList
         //Flipping entries and so the next entry to flip will be the prev entry which is entry.nxt (get it?)
         entry = FlipPointersOfEntry(entry);
         return RecursivelyFlipEntries(entry.nextEntry);//Starting from last, going back after flipping next entry to consider is entry.nxt
+    }
+
+    private void RecursivePrint(DoublyLinkedListEntry entry)
+    {
+        if (entry.nextEntry == null)//traversed to tail
+        {
+            UnityEngine.Debug.Log("prev: " + entry.previousEntry.Value + " at " + entry.Value + " to null");
+            return;
+        }
+
+        if(entry.previousEntry == null) //At head
+        {
+            UnityEngine.Debug.Log("from null, at " + entry.Value + " next: " + entry.nextEntry.Value);
+        }
+        else
+        {
+            UnityEngine.Debug.Log("prev: " + entry.previousEntry.Value + " at " + entry.Value + " next: " + entry.nextEntry.Value);
+        }
+
+        RecursivePrint(entry.nextEntry);
+    }
+
+    private void ReverseRecursivePrint(DoublyLinkedListEntry entry)
+    {
+        if (entry.nextEntry == null)//traversed to tail
+        {
+            UnityEngine.Debug.Log("prev: " + entry.previousEntry.Value + " at " + entry.Value + " to null");
+            return;
+        }
+
+        ReverseRecursivePrint(entry.nextEntry);
+
+        if (entry.previousEntry == null) //At head
+        {
+            UnityEngine.Debug.Log("from null, at " + entry.Value + " next: " + entry.nextEntry.Value);
+        }
+        else
+        {
+            UnityEngine.Debug.Log("prev: " + entry.previousEntry.Value + " at " + entry.Value + " next: " + entry.nextEntry.Value);
+        }
     }
 
     #endregion
