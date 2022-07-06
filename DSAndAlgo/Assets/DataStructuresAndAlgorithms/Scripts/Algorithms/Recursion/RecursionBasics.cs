@@ -26,9 +26,9 @@ public class RecursionBasics : MonoBehaviour
     {
         //Debug.Log("Recursion: " + Inception());
 
-        //Debug.Log("Reversed string of " + _stringToReverse + " \n is " + ReverseString(_stringToReverse));
-        //Debug.Log(_stringToCheckIfPallindrome + " is Pallindrome? " + CheckIfPallindrom(_stringToCheckIfPallindrome));
-        //Debug.Log("Binary of " + _decimalToConvertToBinary + " \n is " + DecimalToBinary(_decimalToConvertToBinary));
+        Debug.Log("Reversed string of " + _stringToReverse + " is \n " + ReverseString(_stringToReverse));
+        Debug.Log(_stringToCheckIfPallindrome + " is Pallindrome? " + CheckIfPallindrom(_stringToCheckIfPallindrome));
+        Debug.Log("Binary of " + _decimalToConvertToBinary + " \n is " + DecimalToBinary(_decimalToConvertToBinary));
         Debug.Log("Sum from " + _sumFromNumber + " is " + SumOfNaturalNumbers(_sumFromNumber));
     }
 
@@ -103,7 +103,7 @@ public class RecursionBasics : MonoBehaviour
     private int SumOfNaturalNumbers(int num)
     {
         //Base case
-        if(num == 0)
+        if (num == 0)
         {
             return 0;
         }
