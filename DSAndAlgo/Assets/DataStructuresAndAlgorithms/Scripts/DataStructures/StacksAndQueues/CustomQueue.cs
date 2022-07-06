@@ -45,12 +45,12 @@ public class CustomQueue
         _head = _head.nextEntry;
         _length--;
 
-        return entryToDeQ.value;
+        return entryToDeQ.Value;
     }
 
     public Object Peek()
     {
-        return _head.value;
+        return _head.Value;
     }
 
     #endregion

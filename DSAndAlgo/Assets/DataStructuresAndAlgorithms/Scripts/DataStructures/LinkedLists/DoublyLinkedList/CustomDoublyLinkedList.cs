@@ -149,7 +149,7 @@ public class CustomDoublyLinkedList
             i++;
         }
 
-        return entryToRetrieve.value;
+        return entryToRetrieve.Value;
     }
 
     public void Reverse()
@@ -188,13 +188,13 @@ public class CustomDoublyLinkedList
 
     public CustomDoublyLinkedList CavemanReverse()
     {
-        CustomDoublyLinkedList reversedLinkedList = new CustomDoublyLinkedList(_head.value);
+        CustomDoublyLinkedList reversedLinkedList = new CustomDoublyLinkedList(_head.Value);
 
         int i = 0; DoublyLinkedListEntry entry = _head;
         while(i < Length - 1)
         {
             entry = entry.nextEntry;
-            reversedLinkedList.Append(entry.value);
+            reversedLinkedList.Append(entry.Value);
             i++;
         }
 
@@ -213,38 +213,40 @@ public class CustomDoublyLinkedList
             if (nextEntry == null)
             {
                 nextEntry = new DoublyLinkedListEntry("null", null);
-                UnityEngine.Debug.Log("Entry at " + i + " is " + currentEntry.value + " pointing from " + "\n" + currentEntry.previousEntry.value +
-                    " pointing to " + nextEntry.value + " that is we've reached the tail");
+                UnityEngine.Debug.Log("Entry at " + i + " is " + currentEntry.Value + " pointing from " + "\n" + currentEntry.previousEntry.Value +
+                    " pointing to " + nextEntry.Value + " that is we've reached the tail");
             }
             else if (previousEntry == null)
             {
                 previousEntry = new DoublyLinkedListEntry("null");
-                UnityEngine.Debug.Log("Entry at " + i + " is " + currentEntry.value + " \n pointing from: " + previousEntry.value +
-                    " \n that's how we know we've just started & \n pointing to: " + currentEntry.nextEntry.value);
+                UnityEngine.Debug.Log("Entry at " + i + " is " + currentEntry.Value + " \n pointing from: " + previousEntry.Value +
+                    " \n that's how we know we've just started & \n pointing to: " + currentEntry.nextEntry.Value);
             }
             else //Both current and previous entries are not null. Means we're in the middle of the list
             {
-                UnityEngine.Debug.Log("Entry at " + i + " is " + currentEntry.value + " \n pointing from " + currentEntry.previousEntry.value
-                    + " \n pointing to: " + currentEntry.nextEntry.value);
+                UnityEngine.Debug.Log("Entry at " + i + " is " + currentEntry.Value + " \n pointing from " + currentEntry.previousEntry.Value
+                    + " \n pointing to: " + currentEntry.nextEntry.Value);
             }
 
             i++;
         }
     }
 
-    #endregion   
+    #endregion
 }
 
 [System.Serializable]
 public class DoublyLinkedListEntry : IDisposable
 {
-    public Object value;
+    private Object _value;
+    public object Value { get => _value; private set => this._value = value; }
+
     public DoublyLinkedListEntry nextEntry;
     public DoublyLinkedListEntry previousEntry;
 
     public DoublyLinkedListEntry(Object value, DoublyLinkedListEntry nextEntry = null, DoublyLinkedListEntry prevEntry = null)
     {
-        this.value = value;
+        this.Value = value;
         this.nextEntry = nextEntry;
         this.previousEntry = prevEntry;
     }
@@ -252,7 +254,7 @@ public class DoublyLinkedListEntry : IDisposable
     //Not really required since automatic garbage collection is there in C#
     public void Dispose()
     {
-        this.value = null;
+        this.Value = null;
         this.nextEntry = null;
         this.previousEntry = null;
     }
