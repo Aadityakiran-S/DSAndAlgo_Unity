@@ -1,0 +1,11 @@
+//If you know a solution is not far from the root of the tree: BFS; Since you check for the nearest children first
+
+//If the tree is very deep and solutions are rare: BFS; DFS is very slow when the tree is very deep. 
+
+//If the tree is very wide:	DFS; BFS is very memory expensive when the tree is wide
+
+//If solutions are frequent but located deep in the tree: DFS; Even if the solutions are deep in the tree, nothing is mentioned that the tree itself is prohibitively deep
+
+//Determining whether a path exists between two nodes:	BFS; That's the use of BFS anyway.
+
+//Finding the shortest path: DFS; That's what this is used for.

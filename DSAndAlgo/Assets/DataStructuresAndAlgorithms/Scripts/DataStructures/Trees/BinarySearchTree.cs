@@ -165,13 +165,13 @@ public class BinarySearchTree
             /// and the children from it have to ref new parent
             /// 
 
-            if(foundNode == Root) //If found node is root, then new root is nodeToReplace
+            if (foundNode == Root) //If found node is root, then new root is nodeToReplace
             {
                 Root = nodeToReplace;
             }
 
             var rootOfFoundNode = foundNode.root;
-            if(rootOfFoundNode != null) //That is, found node is not root
+            if (rootOfFoundNode != null) //That is, found node is not root
             {
                 ///What do we have to do?
                 /// Replace the foundNode in the root with the temp node
@@ -187,6 +187,37 @@ public class BinarySearchTree
         }
 
         return foundValue;
+    }
+
+    public int[] PopulateBSFArray_Recursive()
+    {
+        Queue<BSTNode> queue = new Queue<BSTNode>(); queue.Enqueue(this.Root);
+        List<int> list = new List<int>();
+
+        return Return_BFSValuesInTree_Recursive(queue, list);
+    }
+
+    public int[] PopulateBSFArray_Iterative()
+    {
+        return Return_BFSValuesInTree_Iterative(this.Root);
+    }
+
+    public int[] Populate_DFSValues_InOrder()
+    {
+        List<int> list = new List<int>();
+        return Traverse_InOrder(this.Root, list);
+    }   
+
+    public int[] Populate_DFSValues_PreOrder()
+    {
+        List<int> list = new List<int>();
+        return Traverse_PreOrder(this.Root, list);
+    }
+
+    public int[] Populate_DFSValues_PostOrder()
+    {
+        List<int> list = new List<int>();
+        return Traverse_PostOrder(this.Root, list);
     }
 
     //DOLATER: Create function to find the next largest element in the tree.
@@ -238,6 +269,103 @@ public class BinarySearchTree
         }
 
         return nodeToReturn;
+    }
+
+    private int[] Return_BFSValuesInTree_Iterative(BSTNode node)
+    {
+        List<int> listToReturn = new List<int>(); Queue<BSTNode> tempQueue = new Queue<BSTNode>();
+        tempQueue.Enqueue(node);
+
+        while (tempQueue.Count > 0)
+        {
+            BSTNode currentNode = tempQueue.Dequeue();
+            listToReturn.Add(currentNode.Value);
+
+            if (currentNode.left != null)
+            {
+                tempQueue.Enqueue(currentNode.left);
+            }
+            if (currentNode.right != null)
+            {
+                tempQueue.Enqueue(currentNode.right);
+            }
+        }
+
+        return listToReturn.ToArray();
+    }
+
+    private int[] Return_BFSValuesInTree_Recursive(Queue<BSTNode> queue, List<int> list)
+    {
+        //Base case: When there are no more elements in the queue
+        if (queue.Count == 0)
+        {
+            return list.ToArray();
+        }
+
+        BSTNode currentNode = queue.Dequeue();
+        list.Add(currentNode.Value);
+
+        if (currentNode.left != null)
+        {
+            queue.Enqueue(currentNode.left);
+        }
+        if (currentNode.right != null)
+        {
+            queue.Enqueue(currentNode.right);
+        }
+
+        return Return_BFSValuesInTree_Recursive(queue, list);
+    }
+
+    //Returns all elements in the tree in order
+    private int[] Traverse_InOrder(BSTNode node, List<int> list)
+    {
+        if (node.left != null)
+        {
+            Traverse_InOrder(node.left, list);
+        }
+
+        list.Add(node.Value);
+
+        if (node.right != null)
+        {
+            Traverse_InOrder(node.right, list);
+        }
+
+        return list.ToArray();
+    }
+
+    //Returns elements as they are if added again to the tree, would form the same structure
+    private int[] Traverse_PreOrder(BSTNode node, List<int> list)
+    {
+        list.Add(node.Value);
+
+        if (node.left != null)
+        {
+            Traverse_InOrder(node.left, list);
+        }
+        if (node.right != null)
+        {
+            Traverse_InOrder(node.right, list);
+        }
+
+        return list.ToArray();
+    }
+
+    private int[] Traverse_PostOrder(BSTNode node, List<int> list)
+    {
+        if (node.left != null)
+        {
+            Traverse_InOrder(node.left, list);
+        }
+        if (node.right != null)
+        {
+            Traverse_InOrder(node.right, list);
+        }
+
+        list.Add(node.Value);
+
+        return list.ToArray();
     }
 
     #endregion
