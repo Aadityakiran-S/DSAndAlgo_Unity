@@ -1,0 +1,41 @@
+using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+public class #SCRIPTNAME# : MonoBehaviour
+{
+	#region Question
+	
+	
+
+	#endregion
+
+	#region References
+	
+	
+	
+	#endregion
+	
+	#region UnityLifecycle
+	
+	//Use this to initialize
+	private void Awake()
+	{
+	
+	}	
+	
+	//Use this to run
+	private void Start()
+    {
+        
+    }
+	
+	#endregion
+	
+	#region Methods	
+	
+	
+	
+	#endregion
+}
