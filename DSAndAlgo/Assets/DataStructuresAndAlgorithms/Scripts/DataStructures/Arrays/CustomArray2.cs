@@ -21,7 +21,7 @@ public class CustomArray2
 
     public Object GetObject(int index)
     {
-        CommonMethods.CheckIfIndexInBounds(index, Length);
+        CommonMethodsAndData.CheckIfIndexInBounds(index, Length);
 
         return _data[index];
     }
@@ -64,7 +64,7 @@ public class CustomArray2
 
     public Object Delete(int index)
     {
-        CommonMethods.CheckIfIndexInBounds(index, Length);
+        CommonMethodsAndData.CheckIfIndexInBounds(index, Length);
 
         Object[] arrayWithElementDeleted = new Object[Length - 1];
         Object elementToDelete = null;

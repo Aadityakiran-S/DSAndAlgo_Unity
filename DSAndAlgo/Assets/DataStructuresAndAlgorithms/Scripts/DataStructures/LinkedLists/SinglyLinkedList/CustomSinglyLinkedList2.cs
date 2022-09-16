@@ -52,7 +52,7 @@ public class CustomSinglyLinkedList2
 
     public void Insert(int index, System.Object value)
     {
-        CommonMethods.CheckIfIndexInBounds(index, Length);
+        CommonMethodsAndData.CheckIfIndexInBounds(index, Length);
 
         if (index == 0) //Then we're just prepending
         {
@@ -90,7 +90,7 @@ public class CustomSinglyLinkedList2
 
     public void RemoveAt(int index)
     {
-        CommonMethods.CheckIfIndexInBounds(index, Length);
+        CommonMethodsAndData.CheckIfIndexInBounds(index, Length);
 
         //If removing head, simply remove head. Chaining takes care of itself
         if (index == 0)
@@ -125,7 +125,7 @@ public class CustomSinglyLinkedList2
 
     public System.Object Retrieve(int index)
     {
-        CommonMethods.CheckIfIndexInBounds(index, Length);
+        CommonMethodsAndData.CheckIfIndexInBounds(index, Length);
 
         int i = 0; SinglyLinkedListEntry entryToRetrieve = _head;
         while (i < index)

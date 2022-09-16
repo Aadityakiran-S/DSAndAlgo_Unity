@@ -19,11 +19,11 @@ public class MergeSort_Implementation : MonoBehaviour
 
     private void Start()
     {
-        Debug.LogWarning("Is array initialy sorted? " + CommonMethods.CheckIfArrayIsSorted(_arrayToSort, _arrayToSort.Length));
+        Debug.LogWarning("Is array initialy sorted? " + CommonMethodsAndData.CheckIfArrayIsSorted(_arrayToSort, _arrayToSort.Length));
 
         MergeSort(_arrayToSort);
 
-        Debug.LogWarning("Is array finally sorted? " + CommonMethods.CheckIfArrayIsSorted(_arrayToSort, _arrayToSort.Length));
+        Debug.LogWarning("Is array finally sorted? " + CommonMethodsAndData.CheckIfArrayIsSorted(_arrayToSort, _arrayToSort.Length));
     }
 
     #endregion

@@ -57,7 +57,7 @@ public class CustomDoublyLinkedList
 
     public void Insert(int index, Object value)
     {
-        CommonMethods.CheckIfIndexInBounds(index, Length);
+        CommonMethodsAndData.CheckIfIndexInBounds(index, Length);
 
         if (index == 0) //Then we're just prepending
         {
@@ -101,7 +101,7 @@ public class CustomDoublyLinkedList
 
     public void RemoveAt(int index)
     {
-        CommonMethods.CheckIfIndexInBounds(index, Length);
+        CommonMethodsAndData.CheckIfIndexInBounds(index, Length);
 
         //If removing head, simply remove head. Chaining takes care of itself
         if (index == 0)
@@ -140,7 +140,7 @@ public class CustomDoublyLinkedList
 
     public Object Retrieve(int index)
     {
-        CommonMethods.CheckIfIndexInBounds(index, Length);
+        CommonMethodsAndData.CheckIfIndexInBounds(index, Length);
 
         int i = 0; DoublyLinkedListEntry entryToRetrieve = _head;
         while (i < index)

@@ -19,11 +19,11 @@ public class QuickSort_Implementation : MonoBehaviour
 
     private void Start()
     {
-        Debug.LogWarning("Is array initialy sorted? " + CommonMethods.CheckIfArrayIsSorted(_arrayToSort, _arrayToSort.Length));
+        Debug.LogWarning("Is array initialy sorted? " + CommonMethodsAndData.CheckIfArrayIsSorted(_arrayToSort, _arrayToSort.Length));
 
         QuickSort(_arrayToSort, 0, _arrayToSort.Length - 1);
 
-        Debug.LogWarning("Is array finally sorted? " + CommonMethods.CheckIfArrayIsSorted(_arrayToSort, _arrayToSort.Length));
+        Debug.LogWarning("Is array finally sorted? " + CommonMethodsAndData.CheckIfArrayIsSorted(_arrayToSort, _arrayToSort.Length));
     }
 
     #endregion

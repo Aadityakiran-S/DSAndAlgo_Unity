@@ -202,22 +202,23 @@ public class BinarySearchTree
         return Return_BFSValuesInTree_Iterative(this.Root);
     }
 
-    public int[] Populate_DFSValues_InOrder()
+    //Orders of traversal only applicable for DFS traversala and DFS is recursive by it's very nature
+    public int[] Populate_DFSArray(TraversalOrder order)
     {
         List<int> list = new List<int>();
-        return Traverse_InOrder(this.Root, list);
-    }   
 
-    public int[] Populate_DFSValues_PreOrder()
-    {
-        List<int> list = new List<int>();
-        return Traverse_PreOrder(this.Root, list);
-    }
-
-    public int[] Populate_DFSValues_PostOrder()
-    {
-        List<int> list = new List<int>();
-        return Traverse_PostOrder(this.Root, list);
+        if(order == TraversalOrder.PreOrder)
+        {
+            return Traverse_PreOrder(this.Root, list);
+        }
+        else if (order == TraversalOrder.InOrder)
+        {
+            return Traverse_InOrder(this.Root, list);
+        }
+        else //Traversal is PostOrder
+        {
+            return Traverse_PostOrder(this.Root, list);
+        }
     }
 
     //DOLATER: Create function to find the next largest element in the tree.
@@ -430,4 +431,10 @@ public struct IsFoundAtDepth
 public enum LeftOrRight
 {
     Right, Left, Center
+}
+
+[System.Serializable]
+public enum TraversalOrder
+{
+    PreOrder, InOrder, PostOrder
 }

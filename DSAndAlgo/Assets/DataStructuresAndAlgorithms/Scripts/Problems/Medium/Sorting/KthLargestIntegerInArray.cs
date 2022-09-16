@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class KthLargestIntegerInArray : MonoBehaviour
 {
     #region Question
+    //Link: https://leetcode.com/problems/kth-largest-element-in-an-array/
     //Given an integer array nums and an integer k, return the kth largest element in the array.
     //Note that it is the kth largest element in the sorted order, not the kth distinct element.
 
@@ -27,6 +28,9 @@ public class KthLargestIntegerInArray : MonoBehaviour
     #region References
 
     [SerializeField] private int[] _inputArray;
+    [SerializeField] private int _kValue;
+
+    [SerializeField] private int _kthLargestResult;
 
     #endregion
 
@@ -41,6 +45,7 @@ public class KthLargestIntegerInArray : MonoBehaviour
     //Use this to run
     private void Start()
     {
+        //_kthLargestResult = FindKthLargets_Optimal(_inputArray, _kValue);
         QuickSort(_inputArray, 0, _inputArray.Length - 1);
     }
 
@@ -48,14 +53,76 @@ public class KthLargestIntegerInArray : MonoBehaviour
 
     #region Methods	
 
-    private int FindKthLargest(int[] nums, int k)
+    private int FindKthLargest_Optimal(int[] nums, int k)
     {
+        int indexToFind = nums.Length - k;
+        QuickSelect(nums, 0, nums.Length - 1, indexToFind);
+
+        return nums[indexToFind];
+    }
+
+    //TODO: Implement this
+    private int FindKthLargest_UsingPriorityQueue(int[] nums, int k)
+    {
+        //Just dump it all in a priority queue
+        //Then retrieve the kth if maxHeap or (nums.Count - k)th if minHeap
+         
         return 0;
+    }
+
+    private int FindKthLargest_SubOptimal(int[] nums, int k)
+    {
+        //Simply looking at the kth element from the end after sorting the array
+        int indexToFind = nums.Length - k;
+        QuickSort(nums, 0, nums.Length - 1);
+
+        return nums[indexToFind];
     }
 
     #endregion
 
     #region Auxilliary Functions
+
+    int QuickSelect(int[] nums, int left, int right, int indexToFind)
+    {
+        if (left < right)
+        {
+            int partitionIndex = FindPartition(nums, left, right);
+
+            if (partitionIndex == indexToFind)
+            {
+                return nums[partitionIndex];
+            }
+            else if (indexToFind < partitionIndex) //Move to left sub array
+            {
+                QuickSelect(nums, left, partitionIndex - 1, indexToFind);
+            }
+            else //Move to right sub array
+            {
+                QuickSelect(nums, partitionIndex + 1, right, indexToFind);
+            }
+        }
+
+        return default;
+    }
+
+    int FindPartition(int[] nums, int left, int right)
+    {
+        int pivotElement = nums[right];
+        int partitionIndex = left;
+
+        for (int i = left; i < right; i++)
+        {
+            if(nums[i] < pivotElement)
+            {
+                Swap(i, partitionIndex, nums);
+                partitionIndex++;
+            }
+        }
+
+        Swap(partitionIndex, right, nums);
+        return partitionIndex;
+    }
 
     void QuickSort(int[] inputArray, int left, int right)
     {

@@ -20,11 +20,11 @@ public class BubbleSort_Implementation : MonoBehaviour
 
     private void Start()
     {
-        Debug.LogWarning("Is array initialy sorted? " + CommonMethods.CheckIfArrayIsSorted(_arrayToSort, _arrayToSort.Length));
+        Debug.LogWarning("Is array initialy sorted? " + CommonMethodsAndData.CheckIfArrayIsSorted(_arrayToSort, _arrayToSort.Length));
 
         BubbleSort1(_arrayToSort);
 
-        Debug.LogWarning("Is array finally sorted? " + CommonMethods.CheckIfArrayIsSorted(_arrayToSort, _arrayToSort.Length));
+        Debug.LogWarning("Is array finally sorted? " + CommonMethodsAndData.CheckIfArrayIsSorted(_arrayToSort, _arrayToSort.Length));
     }
 
     #endregion
@@ -43,7 +43,7 @@ public class BubbleSort_Implementation : MonoBehaviour
             //Interchange elements if not sorted
             if (arrayToSort[i] > arrayToSort[i + 1])
             {
-                CommonMethods.SwapElementsInArray(arrayToSort, i, i + 1);
+                CommonMethodsAndData.SwapElementsInArray(arrayToSort, i, i + 1);
             }
 
             i++;    //Incrementing after we've checked one block
@@ -52,7 +52,7 @@ public class BubbleSort_Implementation : MonoBehaviour
             if (i == arrayToSort.Length - 1) 
             {
                 //reset and check if sorted after current pass
-                i = 0; isSorted = CommonMethods.CheckIfArrayIsSorted(arrayToSort, arrayToSort.Length);
+                i = 0; isSorted = CommonMethodsAndData.CheckIfArrayIsSorted(arrayToSort, arrayToSort.Length);
             }
         }
     }
@@ -66,7 +66,7 @@ public class BubbleSort_Implementation : MonoBehaviour
             {
                 if(arrayToSort[j] > arrayToSort[j + 1])
                 {
-                    CommonMethods.SwapElementsInArray(arrayToSort, i, i + 1);
+                    CommonMethodsAndData.SwapElementsInArray(arrayToSort, i, i + 1);
                 }
             }
             k++;

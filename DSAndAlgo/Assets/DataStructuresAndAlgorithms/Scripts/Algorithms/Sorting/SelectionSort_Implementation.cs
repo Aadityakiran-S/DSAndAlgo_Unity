@@ -19,11 +19,11 @@ public class SelectionSort_Implementation : MonoBehaviour
 
 	private void Start()
 	{
-		Debug.LogWarning("Is array initialy sorted? " + CommonMethods.CheckIfArrayIsSorted(_arrayToSort, _arrayToSort.Length));
+		Debug.LogWarning("Is array initialy sorted? " + CommonMethodsAndData.CheckIfArrayIsSorted(_arrayToSort, _arrayToSort.Length));
 
 		SelectionSort(_arrayToSort);
 
-		Debug.LogWarning("Is array finally sorted? " + CommonMethods.CheckIfArrayIsSorted(_arrayToSort, _arrayToSort.Length));
+		Debug.LogWarning("Is array finally sorted? " + CommonMethodsAndData.CheckIfArrayIsSorted(_arrayToSort, _arrayToSort.Length));
 	}
 
 	#endregion
@@ -32,7 +32,7 @@ public class SelectionSort_Implementation : MonoBehaviour
 
 	private void SelectionSort(int[] arrayToSort)
 	{
-        if (CommonMethods.CheckIfArrayIsSorted(arrayToSort, arrayToSort.Length))
+        if (CommonMethodsAndData.CheckIfArrayIsSorted(arrayToSort, arrayToSort.Length))
         {
 			Debug.Log("Already sorted bro");
 			return;
@@ -53,7 +53,7 @@ public class SelectionSort_Implementation : MonoBehaviour
                 }
             }
 
-			CommonMethods.SwapElementsInArray(arrayToSort, i, currentLeastIndex);
+			CommonMethodsAndData.SwapElementsInArray(arrayToSort, i, currentLeastIndex);
         }
 	}
 
