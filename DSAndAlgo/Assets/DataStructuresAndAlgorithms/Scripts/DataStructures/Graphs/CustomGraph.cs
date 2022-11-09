@@ -71,6 +71,8 @@ public class GraphNode
         _connections = new List<GraphNode>();
     }
 
+    #region Public Methods
+
     public void ChangeValue(object value)
     {
         this.Value = value;
@@ -78,13 +80,9 @@ public class GraphNode
 
     public void AddConnection(GraphNode nodeToConnect)
     {
-        if (this == nodeToConnect)
-        {
-            //Just an arbritary rule I came up with to keep things simple
-            UnityEngine.Debug.LogError("You can't connect a node to itself");
-            return;
-        }
-
         _connections.Add(nodeToConnect);
     }
+
+    #endregion
+
 }

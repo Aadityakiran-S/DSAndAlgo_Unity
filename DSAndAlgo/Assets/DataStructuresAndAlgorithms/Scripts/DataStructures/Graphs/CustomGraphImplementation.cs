@@ -37,4 +37,34 @@ public class CustomGraphImplementation : MonoBehaviour
     }
 
     #endregion
+
+    #region Public Functions
+
+    private int[] ReturnBFSArray(int[][] adjacencyList)
+    {
+        Queue<int> bfsQueue = new Queue<int>(); bfsQueue.Enqueue(adjacencyList[0][0]);
+        bool[] seen = new bool[adjacencyList.GetLength(0)]; //Assuming by default all entries are false
+        List<int> answers = new List<int>(); //No shift menthod to add to last index in array for C# so using list
+
+        while(bfsQueue.Count > 0)
+        {
+            int value = bfsQueue.Dequeue();
+            answers.Add(value);
+            seen[value] = true;
+            int[] neighbors = adjacencyList[value];
+
+            for (int i = 0; i < neighbors.Length; i++)
+            {
+                int neighbor = neighbors[i];
+                if(!seen[neighbor]) //If not visited, add to queue to process later
+                {
+                    bfsQueue.Enqueue(neighbor);
+                }
+            }
+        }
+
+        return answers.ToArray();
+    }
+    
+    #endregion
 }

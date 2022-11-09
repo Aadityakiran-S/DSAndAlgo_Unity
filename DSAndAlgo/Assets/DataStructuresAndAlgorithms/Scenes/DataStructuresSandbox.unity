@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1172602402}
   - component: {fileID: 1172602403}
-  - component: {fileID: 1172602404}
   m_Layer: 0
   m_Name: TestYourDataStructureOrAlgorithmHere
   m_TagString: Untagged
@@ -162,24 +161,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172602401}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5b3b10f62880644a801135c84c13751, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stringToReverse: Hello
-  _stringToCheckIfPallindrome: kayap
-  _decimalToConvertToBinary: 4
-  _sumFromNumber: 13
---- !u!114 &1172602404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1172602401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c9d9f6e8dc1ee048be9a4540fdc7ce7, type: 3}
+  m_Script: {fileID: 11500000, guid: e95cb72e73c09154ba6e111214c62fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputArray: 05000000070000000700000008000000080000000a000000
+  _numToFind: 8
+  _foundIndex: 0
+  _rangeOfFound: 
