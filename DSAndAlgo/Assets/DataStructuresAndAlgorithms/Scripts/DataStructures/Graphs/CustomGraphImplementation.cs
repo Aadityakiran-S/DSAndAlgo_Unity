@@ -53,6 +53,7 @@ public class CustomGraphImplementation : MonoBehaviour
             seen[value] = true;
             int[] neighbors = adjacencyList[value];
 
+            //Iterating through all the neighbors and only adding for processing the ones we've not seen
             for (int i = 0; i < neighbors.Length; i++)
             {
                 int neighbor = neighbors[i];
@@ -64,6 +65,31 @@ public class CustomGraphImplementation : MonoBehaviour
         }
 
         return answers.ToArray();
+    }
+
+    private int[] ReturnDFSArray(int[][] adjacencyList) 
+    {
+        List<int> answers = new List<int>();
+        bool[] seen = new bool[adjacencyList.GetLength(0)];
+
+        IterateDFSInAdjacencyList(adjacencyList, answers, seen, 0);
+
+        return answers.ToArray();
+    }
+
+    void IterateDFSInAdjacencyList(int[][] adjacencyList, List<int> answers, bool[] seen, int value)
+    {
+        answers.Add(value);
+        seen[value] = true;
+        int[] neighbours = adjacencyList[value];
+
+        for (int i = 0; i < neighbours.Length; i++)
+        {
+            if(seen[neighbours[i]] != true) //Perform DFS if not seen before
+            {
+                IterateDFSInAdjacencyList(adjacencyList, answers, seen, neighbours[i]);
+            }
+        }
     }
     
     #endregion
