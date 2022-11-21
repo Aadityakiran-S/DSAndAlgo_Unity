@@ -33,20 +33,22 @@ public class CustomGraphImplementation : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     #endregion
 
     #region Public Functions
 
-    private int[] ReturnBFSArray(int[][] adjacencyList)
-    {
-        Queue<int> bfsQueue = new Queue<int>(); bfsQueue.Enqueue(adjacencyList[0][0]);
-        bool[] seen = new bool[adjacencyList.GetLength(0)]; //Assuming by default all entries are false
-        List<int> answers = new List<int>(); //No shift menthod to add to last index in array for C# so using list
+    #region BFS Functions
 
-        while(bfsQueue.Count > 0)
+    private int[] ReturnBFSArray_FromAdjacencyList(int[][] adjacencyList)
+    {
+        List<int> answers = new List<int>(); //No shift menthod to add to last index in array for C# so using list
+        bool[] seen = new bool[adjacencyList.GetLength(0)]; //Assuming by default all entries are false
+        Queue<int> bfsQueue = new Queue<int>(); bfsQueue.Enqueue(0);
+
+        while (bfsQueue.Count > 0)
         {
             int value = bfsQueue.Dequeue();
             answers.Add(value);
@@ -57,7 +59,7 @@ public class CustomGraphImplementation : MonoBehaviour
             for (int i = 0; i < neighbors.Length; i++)
             {
                 int neighbor = neighbors[i];
-                if(!seen[neighbor]) //If not visited, add to queue to process later
+                if (!seen[neighbor]) //If not visited, add to queue to process later
                 {
                     bfsQueue.Enqueue(neighbor);
                 }
@@ -67,7 +69,36 @@ public class CustomGraphImplementation : MonoBehaviour
         return answers.ToArray();
     }
 
-    private int[] ReturnDFSArray(int[][] adjacencyList) 
+    private int[] ReturnBFSArray_FromAdjacencyMatrix(int[][] adjacencyMatrix)
+    {
+        List<int> answers = new List<int>(); //No shift menthod to add to last index in array for C# so using list
+        bool[] seen = new bool[adjacencyMatrix.GetLength(0)]; //Assuming by default all entries are false
+        Queue<int> bfsQueue = new Queue<int>(); bfsQueue.Enqueue(0);
+
+        while (bfsQueue.Count > 0)
+        {
+            int value = bfsQueue.Dequeue();
+            answers.Add(value);
+            seen[value] = true;
+
+            for (int j = 0; j < seen.Length; j++)
+            {
+                //True if current node as a connection to a node we've not seen before
+                if (adjacencyMatrix[value][j] == 1 && seen[j] != true) 
+                {
+                    bfsQueue.Enqueue(j);
+                }
+            }
+        }
+
+        return answers.ToArray();
+    }
+
+    #endregion
+
+    #region DFS Functions
+
+    private int[] ReturnDFSArray_FromAdjacencyList(int[][] adjacencyList)
     {
         List<int> answers = new List<int>();
         bool[] seen = new bool[adjacencyList.GetLength(0)];
@@ -85,12 +116,38 @@ public class CustomGraphImplementation : MonoBehaviour
 
         for (int i = 0; i < neighbours.Length; i++)
         {
-            if(seen[neighbours[i]] != true) //Perform DFS if not seen before
+            if (seen[neighbours[i]] != true) //Perform DFS if not seen before
             {
                 IterateDFSInAdjacencyList(adjacencyList, answers, seen, neighbours[i]);
             }
         }
     }
-    
+
+    private int[] ReturnDFSArray_FromAdjacencyMatrix(int[][] adjacencyList)
+    {
+        List<int> answers = new List<int>();
+        bool[] seen = new bool[adjacencyList.GetLength(0)];
+
+        IterateDFSInAdjacencyMatrix(adjacencyList, answers, seen, 0);
+
+        return answers.ToArray();
+    }
+
+    void IterateDFSInAdjacencyMatrix(int[][] adjacencyMatrix, List<int> answers, bool[] seen, int value)
+    {
+        answers.Add(value);
+        seen[value] = true;
+
+        for (int j = 0; j < seen.Length; j++)
+        {
+            if(adjacencyMatrix[value][j] == 1 && seen[j] != true)
+            {
+                IterateDFSInAdjacencyMatrix(adjacencyMatrix, answers, seen, j);
+            }
+        }
+    }
+
+    #endregion
+
     #endregion
 }
