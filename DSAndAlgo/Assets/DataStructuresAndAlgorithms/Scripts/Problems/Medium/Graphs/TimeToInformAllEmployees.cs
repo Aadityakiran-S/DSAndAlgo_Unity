@@ -49,7 +49,10 @@ public class TimeToInformAllEmployees : MonoBehaviour
 
     #region References
 
-
+    public int n;
+    public int headID;
+    public int[] manager;
+    public int[] informTime;
 
     #endregion
 
@@ -64,16 +67,19 @@ public class TimeToInformAllEmployees : MonoBehaviour
     //Use this to run
     private void Start()
     {
-
+        Debug.Log("TIme to inform is: " + NumOfMinutes(n, headID, manager, informTime));
     }
 
     #endregion
 
     #region Exposed Methods	
 
-    private int NumOfMinutes(int n, int headID, int[] manager, int[] informTime)
+    //TODO: Some bug is there, fix it
+    public int NumOfMinutes(int n, int headID, int[] manager, int[] informTime)
     {
-        return 0;
+        int[][] adjacencyList = Return_AdjacencyList(manager);
+
+        return ReturnTimeToInform_DFS(headID, adjacencyList, informTime);
     }
 
     #endregion
@@ -82,18 +88,59 @@ public class TimeToInformAllEmployees : MonoBehaviour
 
     int[][] Return_AdjacencyList(int[] managers)
     {
-        List<List<int>> adjacencyList = new List<List<int>>();
+        //List<List<int>> adjacencyList = new List<List<int>>();
+        List<int>[] adjacencyList = new List<int>[managers.Length];
 
         for (int i = 0; i < managers.Length; i++)
         {
-            if(managers[i] != -1) //No need to add connection of head of company to himself
+            if (managers[i] != -1) //No need to add connection of head of company to himself
             {
                 //adjacencyList[i].Add(managers[i]); //No need for this line since this is a directed graph
-                adjacencyList[managers[i]].Add(i);
+                if (adjacencyList[managers[i]] == null)//If list inside array isn't initialized yet,
+                {
+                    List<int> tempList = new List<int>();
+                    tempList.Add(i);
+                    adjacencyList[managers[i]] = tempList;
+                }
+                else //If already there's a list inside the index of the array, simply add the element
+                {
+                    adjacencyList[managers[i]].Add(i);
+                }
             }
         }
 
-        return adjacencyList.Select(a => a.ToArray()).ToArray();
+        int[][] newAdjList = new int[managers.Length][];
+        for (int i = 0; i < managers.Length; i++)
+        {
+            if(adjacencyList[i] == null)
+            {
+                newAdjList[i] = new int[0];
+            }
+            else
+            {
+                newAdjList[i] = adjacencyList[i].ToArray();
+            }
+        }
+
+        return newAdjList;
+    }
+
+    int ReturnTimeToInform_DFS(int currentId, int[][] adjacencyList, int[] informTimes)
+    {
+        //Return 0 if you encounter an employee with no subbordinates
+        if (adjacencyList[currentId].Length == 0)
+        {
+            return 0;
+        }
+
+        int maxTimeDownwards = 0;
+        int[] subbordinates = adjacencyList[currentId];
+        for (int i = 0; i < subbordinates.Length; i++) //DFS part of the func; getting max time downwards
+        {
+            maxTimeDownwards = Math.Max(ReturnTimeToInform_DFS(subbordinates[i], adjacencyList, informTimes), maxTimeDownwards);
+        }
+
+        return maxTimeDownwards + informTimes[currentId];
     }
 
     #endregion
