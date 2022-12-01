@@ -99,20 +99,16 @@ public class TimeToInformAllEmployees : MonoBehaviour
                 if (adjacencyList[managers[i]] == null)//If list inside array isn't initialized yet,
                 {
                     List<int> tempList = new List<int>();
-                    tempList.Add(i);
                     adjacencyList[managers[i]] = tempList;
                 }
-                else //If already there's a list inside the index of the array, simply add the element
-                {
-                    adjacencyList[managers[i]].Add(i);
-                }
+                adjacencyList[managers[i]].Add(i); //Adding to list after initialization
             }
         }
 
         int[][] newAdjList = new int[managers.Length][];
         for (int i = 0; i < managers.Length; i++)
         {
-            if(adjacencyList[i] == null)
+            if (adjacencyList[i] == null)
             {
                 newAdjList[i] = new int[0];
             }
