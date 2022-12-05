@@ -66,8 +66,9 @@ public class CourseScheduler : MonoBehaviour
     public bool CanFinish(int numCourses, int[][] prerequisites)
     {
         int[][] adjacencyList = Return_AdjacencyList(numCourses, prerequisites);
+        bool[] seen = new bool[numCourses];
 
-        return false;
+        return RecursiveCoursePossibilityCheck(adjacencyList, 0, seen);
     }
 
     #endregion
@@ -103,6 +104,41 @@ public class CourseScheduler : MonoBehaviour
         }
 
         return finalAdjacencyList;
+    }
+
+    private bool RecursiveCoursePossibilityCheck(int[][] adjacencyList, int index, bool[] seen)
+    {
+        //Base case is when one path terminates or when we've reached a loop
+        if (adjacencyList[index] == null) //We have reached the end of our loop (nowhere left to go)
+        {
+            //Resetting seen array since we're going to start the iteration again
+            for (int i = 0; i < seen.Length; i++)
+            {
+                seen[i] = false;
+            }
+            return true;
+        }
+        else if (seen[index] == true) //If we've come across this element before, we've made a loop
+        {
+            return false;
+        }
+
+        seen[index] = true; //Setting this element as seen
+        int[] connections = adjacencyList[index];
+        for (int i = 0; i < connections.Length; i++)
+        {
+            //If recursion for further steps returns false, then exit out of stack 
+            if (RecursiveCoursePossibilityCheck(adjacencyList, connections[i], seen) == false)
+            {
+                return false;
+            }
+            else //Otherwise continue exploring next element
+            {
+                continue;
+            }
+        }
+
+        return true; //Once we've reached the end of a path
     }
 
     #endregion
