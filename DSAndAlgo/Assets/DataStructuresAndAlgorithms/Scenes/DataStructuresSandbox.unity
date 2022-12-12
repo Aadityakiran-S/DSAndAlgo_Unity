@@ -163,10 +163,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1172602401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb31add25d80363449f8a553e9716f9f, type: 3}
+  m_Script: {fileID: 11500000, guid: b982b2e76950c4e43809198f5e2b0ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  n: 6
-  headID: 2
-  manager: 0200000002000000ffffffff020000000200000002000000
-  informTime: 000000000000000001000000000000000000000000000000
