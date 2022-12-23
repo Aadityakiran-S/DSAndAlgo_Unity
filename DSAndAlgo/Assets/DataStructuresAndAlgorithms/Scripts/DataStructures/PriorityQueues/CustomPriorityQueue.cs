@@ -210,7 +210,7 @@ public struct PriorityObject
 
     public PriorityObject(object obj, int priority)
     {
-        value = obj;
+        this.value = obj;
         this.priority = priority;
     }
 }
