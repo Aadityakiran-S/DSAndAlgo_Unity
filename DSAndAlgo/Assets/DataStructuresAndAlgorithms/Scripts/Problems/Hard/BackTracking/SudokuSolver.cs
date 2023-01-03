@@ -67,7 +67,8 @@ public class SudokuSolver : MonoBehaviour
             {
                 if (CurrentNumberValidityCheck(board, row, column, i))
                 {
-                    char c = (char)i;
+                    //char c = (char)i;
+                    char c = i.ToString().ToCharArray()[0];
                     board[row][column] = c;
                     if (SudokuSolver_Backtracking(board, row, column + 1))
                     {
@@ -83,17 +84,19 @@ public class SudokuSolver : MonoBehaviour
 
     private bool CurrentNumberValidityCheck(char[][] board, int row, int column, int currentNum)
     {
+        char charToCheck = currentNum.ToString().ToCharArray()[0];
+
         //Performing col and row validity check in one iteration
         for (int i = 0; i < 9; i++)
         {
             //Column validity check
-            if(board[row][i] == currentNum)
+            if (board[row][i] == charToCheck)
             {
                 return false;
             }
 
             //Row validity check
-            if(board[i][column] == currentNum)
+            if (board[i][column] == charToCheck)
             {
                 return false;
             }
@@ -107,12 +110,12 @@ public class SudokuSolver : MonoBehaviour
         {
             for (int j = minCol; j < minCol + 3; j++)
             {
-                if (board[i][j] == currentNum)
+                if (board[i][j] == charToCheck)
                     return false;
             }
         }
 
-        return true;      
+        return true;
     }
 
     #endregion
