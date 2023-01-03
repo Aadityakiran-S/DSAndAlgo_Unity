@@ -36,122 +36,83 @@ public class SudokuSolver : MonoBehaviour
 
     public void SolveSudoku(char[][] board)
     {
-        for (int i = 1; i <= board.GetLength(0); i++)
-        {
-            SudokuSolver_Backtracking(board, 0, 0, i);
-        }
+        SudokuSolver_Backtracking(board, 0, 0);
     }
 
     #region Private Methods
 
-    private void SudokuSolver_Backtracking(char[][] input, int row, int column, int currentNum)
+    private bool SudokuSolver_Backtracking(char[][] board, int row, int column)
     {
-        //Condition for out of bounds
-        if (row == -1 || column == -1)
-        {
-            return;
-        }
-
-        //If current number does not pass row, column and grid validity check
-        if (!CurrentNumberValidityCheck(input, row, column, currentNum))
-        {
-            return;
-        }
-
-        input[row][column] = (char)currentNum; //Adding the current number if valid
-
-        int[] nextValidCell = Return_NextEmptyCell(input, row, column);
-        for (int i = 1; i < 10; i++)
-        {
-            SudokuSolver_Backtracking(input, nextValidCell[0], nextValidCell[1], i);
-        }
-
-        //Removing the char if invalid 
-        input[row][column] = ',';
-    }
-
-    private int[] Return_NextEmptyCell(char[][] input, int row, int column)
-    {
-        int[] validCell = new int[2] { -1, -1 };
-
-        while (row < 10)
-        {
-            while (column < 10)
-            {
-                if (input[row][column] == ',')
-                {
-                    validCell = new int[] { row, column };
-                    return validCell;
-                }
-
-                column++;
-            }
-
-            row++;
-            column = 0;
-        }
-
-        return validCell;
-    }
-
-    private bool CurrentNumberValidityCheck(char[][] input, int row, int column, int currentNum)
-    {
-        if (ColumnValidity(input, row, currentNum) && RowValidity(input, column, currentNum)
-            && GridValidity(input, row, column, currentNum))
+        //Reached the end? => We've completed the solution
+        if (row == 9)
         {
             return true;
+        }
+
+        //Reached the end of a row? => Go to next row 
+        if (column == 9)
+        {
+            return SudokuSolver_Backtracking(board, row + 1, 0);
+        }
+
+        //If not empty => Go to next cell
+        if (board[row][column] != '.')
+        {
+            return SudokuSolver_Backtracking(board, row, column + 1);
+        }
+        //If empty => Put all possible values in this cell itself
+        else
+        {
+            for (int i = 1; i <= 9; i++)
+            {
+                if (CurrentNumberValidityCheck(board, row, column, i))
+                {
+                    char c = (char)i;
+                    board[row][column] = c;
+                    if (SudokuSolver_Backtracking(board, row, column + 1))
+                    {
+                        return true;
+                    }
+                    board[row][column] = '.';
+                }
+            }
         }
 
         return false;
     }
 
-    private bool GridValidity(char[][] input, int row, int column, int currentNum)
+    private bool CurrentNumberValidityCheck(char[][] board, int row, int column, int currentNum)
     {
-        //Finding the starting index of the grid that [r,c] belongs to
-        int minRow = (int)(3 * Decimal.Truncate(row / 3));
-        int minCol = (int)(3 * Decimal.Truncate(column / 3));
-
-        //Iterating within the grid only (from the element to 2 added to the element)
-        for (int i = minRow; i < minRow + 2; i++)
+        //Performing col and row validity check in one iteration
+        for (int i = 0; i < 9; i++)
         {
-            for (int j = minCol; j < minCol + 2; j++)
+            //Column validity check
+            if(board[row][i] == currentNum)
             {
-                if (input[i][j] == currentNum)
-                {
+                return false;
+            }
+
+            //Row validity check
+            if(board[i][column] == currentNum)
+            {
+                return false;
+            }
+        }
+
+        //Performing grid validity check
+        int minRow = (int)((int)3 * Math.Floor((float)row / 3));
+        int minCol = (int)((int)3 * Math.Floor((float)column / 3));
+
+        for (int i = minRow; i < minRow + 3; i++)
+        {
+            for (int j = minCol; j < minCol + 3; j++)
+            {
+                if (board[i][j] == currentNum)
                     return false;
-                }
             }
         }
 
-        return true;
-    }
-
-    //Check all rows for current num
-    private bool RowValidity(char[][] input, int column, int currentNum)
-    {
-        for (int i = 0; i < input.GetLength(0); i++)
-        {
-            if (input[i][column] == currentNum)
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    //Check all columns for current num
-    private bool ColumnValidity(char[][] input, int row, int currentNum)
-    {
-        for (int i = 0; i < input.GetLength(1); i++)
-        {
-            if (input[row][i] == currentNum)
-            {
-                return false;
-            }
-        }
-
-        return true;
+        return true;      
     }
 
     #endregion
