@@ -163,7 +163,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1172602401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90a7bb3085d37c84595ca3fcbf7b0028, type: 3}
+  m_Script: {fileID: 11500000, guid: f573024faf53ce248a70d8c65a8a52b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  successionList: []
+  _input:
+  - eat
+  - tea
+  - tan
+  - ate
+  - nat
+  - bat

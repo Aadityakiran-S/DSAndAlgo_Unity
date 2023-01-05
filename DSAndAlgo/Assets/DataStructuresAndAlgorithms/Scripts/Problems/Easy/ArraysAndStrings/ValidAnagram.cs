@@ -7,33 +7,7 @@ using System.Collections.Generic;
 public class ValidAnagram : MonoBehaviour
 {
     #region Question
-
-    //Given two strings s and t, return true if t is an anagram of s, and false otherwise.
-
-    //An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase,
-    //typically using all the original letters exactly once.
-
-
-
-    //Example 1:
-
-    //Input: s = "anagram", t = "nagaram"
-    //Output: true
-    //Example 2:
-
-    //Input: s = "rat", t = "car"
-    //Output: false
-
-
-
-    //Constraints:
-
-    //1 <= s.length, t.length <= 5 * 104
-    //s and t consist of lowercase English letters.
-
-
-    //Follow up: What if the inputs contain Unicode characters? How would you adapt your solution to such a case?
-
+    //https://leetcode.com/problems/valid-anagram/
     #endregion
 
     #region References
@@ -64,9 +38,7 @@ public class ValidAnagram : MonoBehaviour
         s = new string(sChar);
         t = new string(tChar);
 
-        if (s == t)
-            return true;
-        else return false;
+        return s == t;
     }
 
     private bool CheckIfValidAnagram_2(string s, string t)
@@ -75,8 +47,8 @@ public class ValidAnagram : MonoBehaviour
         if (s.Length != t.Length)
             return false;
 
-        Dictionary<char, int> sChars  = new Dictionary<char, int>();
-        Dictionary<char, int> tChars  = new Dictionary<char, int>();
+        Dictionary<char, int> sChars = new Dictionary<char, int>();
+        Dictionary<char, int> tChars = new Dictionary<char, int>();
 
         //Populating hashTable for s
         foreach (char c in s)
@@ -91,7 +63,7 @@ public class ValidAnagram : MonoBehaviour
         }
 
         //Same process for t
-        foreach(char c in t)
+        foreach (char c in t)
         {
             if (tChars.ContainsKey(c))
             {
@@ -104,9 +76,18 @@ public class ValidAnagram : MonoBehaviour
         //If all entries with corresponding counts are same in both => Valid anagram
         foreach (var item in sChars)
         {
-            if (!tChars.Contains(item))
+            //If doesn't contain any one key then they're just words of same length
+            if (!tChars.ContainsKey(item.Key))
             {
                 return false;
+            }
+            else
+            {
+                //If not of same count, then they're not exactly anagrams
+                if(tChars[item.Key] != sChars[item.Key])
+                {
+                    return false;
+                }
             }
         }
 

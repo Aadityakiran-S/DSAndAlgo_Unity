@@ -78,7 +78,8 @@ public class NumberOfIslands : MonoBehaviour
             {
                 if (grid[row][column] == 1) //If we encounter land, 
                 {
-                    TraverseBFSToClearAllConnectedLand(grid, row, column); //Eliminate all land attached to it so that we don't recount islands
+                    //Eliminate all land attached to it so that we don't recount islands
+                    TraverseBFSToClearAllConnectedLand(grid, row, column); 
                     count++; //Increment island count
                 }
             }
