@@ -38,4 +38,10 @@ public class #SCRIPTNAME# : MonoBehaviour
 	
 	
 	#endregion
+
+	#region Helper Methods	
+	
+	
+	
+	#endregion
 }
