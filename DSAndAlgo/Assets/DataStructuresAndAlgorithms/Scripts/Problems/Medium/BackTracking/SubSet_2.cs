@@ -37,11 +37,9 @@ public class SubSet_2 : MonoBehaviour
     public IList<IList<int>> SubsetsWithDup(int[] nums)
     {
         IList<IList<int>> results = new List<IList<int>>();
-        List<int> subset = new List<int>();
-
         Array.Sort(nums);//Array needs to be sorted for us to skip duplicates
 
-        FindSubsWithDup_Rec(nums, 0, subset, results);
+        FindSubsWithDup_Rec(nums, 0, new List<int>(), results);
 
         return results;
     }
@@ -60,15 +58,15 @@ public class SubSet_2 : MonoBehaviour
 
         //Add entry
         subset.Add(nums[i]);
-        FindSubsWithDup_Rec(nums, i, subset, res);
+        FindSubsWithDup_Rec(nums, i + 1, subset, res);
 
         //Skipping to front of duplicates if exists
-        while (i + 1 < nums.Length && nums[i] == nums[i + 1]) 
+        while (i < nums.Length - 1 && nums[i] == nums[i + 1])
             i++;
 
         //Adding nothing
         subset.RemoveAt(subset.Count - 1); //Removing the last entry since we're adding nothing
-        FindSubsWithDup_Rec(nums, i, subset, res);
+        FindSubsWithDup_Rec(nums, i + 1, subset, res);
     }
     #endregion
 }
