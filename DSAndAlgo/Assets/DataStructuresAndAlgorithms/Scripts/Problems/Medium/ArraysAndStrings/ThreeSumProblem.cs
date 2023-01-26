@@ -31,53 +31,53 @@ public class ThreeSumProblem : MonoBehaviour
         
     }
 
-	#endregion
+    #endregion
 
-	#region Methods	
+    #region Methods	
 
-	public IList<IList<int>> ThreeSum(int[] nums)
-	{
-        IList<IList<int>> output = new List<IList<int>>();
+    public IList<IList<int>> ThreeSum(int[] nums)
+    {
+        IList<IList<int>> result = new List<IList<int>>();
+        Array.Sort(nums); //Need to sort input for 2Sum II to be applied in inner loop
 
-        if (nums == null || nums.Length < 3)
-            return output;
-
-        Array.Sort(nums);
-
-        //Iterating to second last element
-        for (int i = 0; i < nums.Length - 2; i++)
+        //Setting the first pointer
+        for (int i = 0; i <= nums.Length - 3; i++)
         {
-            //Cannot form a triplet adding to zero if least element itself is positive
-            //To find unique element, need to start from an unseen before element
-            if (nums[i] > 0 || i > 0 && nums[i] == nums[i - 1])
+
+            //Skipping over duplicates in the first element of triplet
+            if (i > 0 && nums[i] == nums[i - 1])
             {
                 continue;
             }
-
-            //After this point it's basically 2Sum 2 (when input array is sorted)
-            int target = -nums[i];
-            int j = i + 1; int k = nums.Length - 1;
-
+            //Setting pointers inside to do 2 Sum II
+            int j = i + 1; int k = nums.Length - 1; int target = -nums[i];
             while (j < k)
             {
-                //If equal, add to output and update left and right
-                if (nums[i] + nums[j] + nums[k] == 0)
+                if (nums[j] + nums[k] > target)
                 {
-                    List<int> temp = new List<int>() { nums[i], nums[j], nums[k] };
-                    output.Add(temp);
-
-                    j++; k--;
-                }
-                //If sum falls short, increment left
-                else if (nums[i] + nums[j] + nums[k] < 0)
-                    j++;
-                else //If sum exceeds, decrement right
                     k--;
+                }
+                else if (nums[j] + nums[k] < target)
+                {
+                    j++;
+                }
+                //We've found our triplet
+                else
+                {
+                    result.Add(new List<int>() { nums[i], nums[j], nums[k] });
+                    j++;
+
+                    //Skipping over duplicates in the inner loop as well
+                    while (nums[j] == nums[j - 1] && j < k)
+                    {
+                        j++;
+                    }
+                }
             }
         }
 
-        return output;
+        return result;
     }
 
-	#endregion
+    #endregion
 }
