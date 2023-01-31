@@ -81,20 +81,20 @@ public class FlattenMultilevelDoublyLinkedList : MonoBehaviour
 
     #region Methods	
 
-    private Node Flatten(Node head) //S:1, T:2n
+    private MultiLevelLLNode Flatten(MultiLevelLLNode head) //S:1, T:2n
     {
         //No need to flatten if there's nothing given in the first place. 
         if (head == null) return head;
 
-        Node currentNode = head;
+        MultiLevelLLNode currentNode = head;
 
         //Move into or to the right. If either node has something below it or to it's right, move ahead
         while (currentNode.next != null || currentNode.child != null)
         {
             if (currentNode.child != null) //Encountered a child? => Go to end and merge up
             {
-                Node leftNode = currentNode; currentNode = currentNode.child; //Moving to child branch for end traversal
-                Node rightNode = leftNode.next; leftNode.child = null; //Disconnecting child
+                MultiLevelLLNode leftNode = currentNode; currentNode = currentNode.child; //Moving to child branch for end traversal
+                MultiLevelLLNode rightNode = leftNode.next; leftNode.child = null; //Disconnecting child
                 currentNode.prev = leftNode; leftNode.next = currentNode; //Setting pointers of left node
 
                 //Traversing to the end of the child branch
@@ -123,19 +123,19 @@ public class FlattenMultilevelDoublyLinkedList : MonoBehaviour
 [System.Serializable]
 public class MultilevelDoublyLinkedList
 {
-    public Node head;
+    public MultiLevelLLNode head;
 
-    private Node _tail;
+    private MultiLevelLLNode _tail;
 
-    public MultilevelDoublyLinkedList(int value, Node left = null, Node right = null, Node child = null)
+    public MultilevelDoublyLinkedList(int value, MultiLevelLLNode left = null, MultiLevelLLNode right = null, MultiLevelLLNode child = null)
     {
-        head = new Node(value, left, right, child);
+        head = new MultiLevelLLNode(value, left, right, child);
         _tail = head;
     }
 
-    public void Append(int value, Node child = null)
+    public void Append(int value, MultiLevelLLNode child = null)
     {
-        Node newTail = new Node(value, _tail, null, child);
+        MultiLevelLLNode newTail = new MultiLevelLLNode(value, _tail, null, child);
         _tail.next = newTail;
     }
 }
@@ -143,14 +143,14 @@ public class MultilevelDoublyLinkedList
 
 // Definition for a Node.
 [System.Serializable]
-public class Node
+public class MultiLevelLLNode
 {
     public int val;
-    public Node prev;
-    public Node next;
-    public Node child;
+    public MultiLevelLLNode prev;
+    public MultiLevelLLNode next;
+    public MultiLevelLLNode child;
 
-    public Node(int value, Node previous, Node nextNode, Node child)
+    public MultiLevelLLNode(int value, MultiLevelLLNode previous, MultiLevelLLNode nextNode, MultiLevelLLNode child)
     {
         this.val = value;
         this.prev = previous;
