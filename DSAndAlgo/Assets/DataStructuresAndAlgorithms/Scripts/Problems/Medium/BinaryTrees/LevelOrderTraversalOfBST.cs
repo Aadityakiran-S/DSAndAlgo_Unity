@@ -53,44 +53,37 @@ public class LevelOrderTraversalOfBST : MonoBehaviour
 
     private IList<IList<int>> LevelOrder_Optimized(TreeNode root)
     {
-        IList<IList<int>> valueList = new List<IList<int>>();
+        IList<IList<int>> output = new List<IList<int>>();
 
-        //Return condition if root itself is null
+        //Edge case
         if (root == null)
-            return valueList;
-
-        Queue<TreeNode> childQ = new Queue<TreeNode>(); childQ.Enqueue(root);
-        int currentLevelCount = childQ.Count;
-
-        //Iterating till at end level (no more children in childQ)
-        while(childQ.Count > 0)
         {
-            List<int> currentLevelValues = new List<int>();
-
-            //Iterating through count of current level to add values to list
-            for (int i = 0; i < currentLevelCount; i++)
-            {
-                TreeNode currentNode = childQ.Dequeue();
-
-                //Adding children to the back of the queue
-                if(currentNode.left != null)
-                {
-                    childQ.Enqueue(currentNode.left);
-                }
-                if(currentNode.right != null)
-                {
-                    childQ.Enqueue(currentNode.right);
-                }
-
-                //Adding the value of current child to current level values list
-                currentLevelValues.Add(currentNode.val);
-            }
-
-            //Adding current level values to list and updating count with current number of children in level
-            valueList.Add(currentLevelValues); currentLevelCount = childQ.Count;
+            return output;
         }
 
-        return valueList;
+        //Initializing variables
+        Queue<TreeNode> bfsQ = new Queue<TreeNode>(); bfsQ.Enqueue(root);
+        List<int> currList = new List<int>(); int count = 0;
+
+        //Performing BFS
+        while (bfsQ.Count > 0)
+        {
+            TreeNode curr = bfsQ.Dequeue(); count--;
+            currList.Add(curr.val);
+
+            if (curr.left != null)
+                bfsQ.Enqueue(curr.left);
+            if (curr.right != null)
+                bfsQ.Enqueue(curr.right);
+
+            //Keeping track of level set bu using count variable
+            if (count <= 0)
+            {
+                output.Add(new List<int>(currList)); currList.Clear(); count = bfsQ.Count;
+            }
+        }
+
+        return output;
     }
 
     //This is basically BFS iterative.
