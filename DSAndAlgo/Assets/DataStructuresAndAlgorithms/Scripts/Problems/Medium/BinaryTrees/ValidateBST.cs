@@ -56,35 +56,30 @@ public class ValidateBST : MonoBehaviour
 
     #region Optimal Approach
 
-    private bool InValidBST_Optimal(TreeNode root)
+    public bool IsValidBST(TreeNode root)
     {
-        return CheckIfBSTValid_Recursive(root, int.MaxValue, int.MinValue);
+        //Passing nullable int becuase we may have root input as infinity or -infinity
+        return Recurse_ValidateBST(root, null, null);
     }
 
-    bool CheckIfBSTValid_Recursive(TreeNode node, int right, int left)
+    private bool Recurse_ValidateBST(TreeNode curr, int? floor, int? ceiling)
     {
-        if (node.val <= left || node.val >= right)
+        //Base case => When we reach a null node (past leaf)
+        if (curr == null)
+        {
+            return true;
+        }
+
+        //This is the basic condition for BST, we're propagating that condition
+        //all the way through recursing through the tree
+        if (floor != null && curr.val <= floor || ceiling != null && curr.val >= ceiling)
         {
             return false;
         }
-
-        if (node.left != null)
-        {
-            if (!CheckIfBSTValid_Recursive(node.left, node.val, left))
-            {
-                return false;
-            }
-        }
-
-        if (node.right != null)
-        {
-            if(!CheckIfBSTValid_Recursive(node.right, right, node.val))
-            {
-                return false;
-            }
-        }
-
-        return true;
+        return (
+            Recurse_ValidateBST(curr.left, floor, curr.val) &&
+            Recurse_ValidateBST(curr.right, curr.val, ceiling)
+            );
     }
 
     #endregion
