@@ -52,6 +52,39 @@ public class RightSideViewOfBST : MonoBehaviour
 
 	#region Methods	
 
+	private IList<int> RightSideView_SecondBFSApproach(TreeNode root)
+	{
+		IList<int> output = new List<int>();
+		//Base case
+		if (root == null)
+		{
+			return output;
+		}
+
+		Queue<TreeNode> bfsQ = new Queue<TreeNode>();
+		bfsQ.Enqueue(root); int count = 0;
+
+		//Basically doing level order traversal and taking only rightmost element
+		while (bfsQ.Count > 0)
+		{
+			TreeNode curr = bfsQ.Dequeue(); count--;
+
+			if (curr.left != null)
+				bfsQ.Enqueue(curr.left);
+			if (curr.right != null)
+				bfsQ.Enqueue(curr.right);
+
+			//Taking in rightmost element
+			if (count <= 0)
+			{
+				output.Add(curr.val);
+				count = bfsQ.Count;
+			}
+		}
+
+		return output;
+	}
+
 	//DFS preOrder with right side first approach (NRL PreOrder)
 	private IList<int> RightSideView_DFSApproach(TreeNode root)
     {
