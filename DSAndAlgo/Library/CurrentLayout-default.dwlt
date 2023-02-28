@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: Project
   m_RootView: {fileID: 4}
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 276, y: 192}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
-  controlID: 189
+  controlID: 103
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,10 +169,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 939
-  m_MinSize: {x: 679, y: 492}
-  m_MaxSize: {x: 18004, y: 14042}
+  m_MinSize: {x: 677, y: 492}
+  m_MaxSize: {x: 18003, y: 14042}
   vertical: 1
-  controlID: 46
+  controlID: 108
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -194,10 +194,10 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 939
-  m_MinSize: {x: 679, y: 492}
-  m_MaxSize: {x: 18004, y: 14042}
+  m_MinSize: {x: 677, y: 492}
+  m_MaxSize: {x: 18003, y: 14042}
   vertical: 0
-  controlID: 47
+  controlID: 109
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -219,10 +219,10 @@ MonoBehaviour:
     y: 0
     width: 1393
     height: 939
-  m_MinSize: {x: 403, y: 492}
-  m_MaxSize: {x: 14003, y: 14042}
+  m_MinSize: {x: 401, y: 492}
+  m_MaxSize: {x: 14002, y: 14042}
   vertical: 1
-  controlID: 48
+  controlID: 110
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -244,10 +244,10 @@ MonoBehaviour:
     y: 0
     width: 1393
     height: 475
-  m_MinSize: {x: 403, y: 221}
-  m_MaxSize: {x: 8003, y: 4021}
+  m_MinSize: {x: 401, y: 221}
+  m_MaxSize: {x: 8001, y: 4021}
   vertical: 0
-  controlID: 170
+  controlID: 164
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -267,8 +267,8 @@ MonoBehaviour:
     y: 0
     width: 358
     height: 475
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 23}
   m_Panes:
   - {fileID: 23}
@@ -293,8 +293,8 @@ MonoBehaviour:
     y: 0
     width: 1035
     height: 475
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 26}
   m_Panes:
   - {fileID: 22}
@@ -324,10 +324,10 @@ MonoBehaviour:
     y: 475
     width: 1393
     height: 464
-  m_MinSize: {x: 333, y: 271}
-  m_MaxSize: {x: 14003, y: 10021}
+  m_MinSize: {x: 332, y: 271}
+  m_MaxSize: {x: 14002, y: 10021}
   vertical: 0
-  controlID: 49
+  controlID: 111
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -347,8 +347,8 @@ MonoBehaviour:
     y: 0
     width: 692
     height: 464
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 27}
   m_Panes:
   - {fileID: 27}
@@ -630,7 +630,7 @@ MonoBehaviour:
       isSuite: 1
       categories: []
       parentId: 1009
-      parentUniqueId: '[EditModeTests][D:/UnityProjects/Personal/Projects/DSAndAlgo_Unity/DSAndAlgo/Library/ScriptAssemblies/EditModeTests.dll][suite]'
+      parentUniqueId: '[EditModeTests][D:/Software Projects/Personal Projects/DSAndAlgo_Unity/DSAndAlgo/Library/ScriptAssemblies/EditModeTests.dll][suite]'
     - id: 1002
       uniqueId: EditModeTests.dll/BinaryTreeRemoveFunction_Test/[EditModeTests][BinaryTreeRemoveFunction_Test.BinaryTreeRemoveFunction_TestSimplePasses]
       name: BinaryTreeRemoveFunction_TestSimplePasses
@@ -663,7 +663,7 @@ MonoBehaviour:
       isSuite: 1
       categories: []
       parentId: 1009
-      parentUniqueId: '[EditModeTests][D:/UnityProjects/Personal/Projects/DSAndAlgo_Unity/DSAndAlgo/Library/ScriptAssemblies/EditModeTests.dll][suite]'
+      parentUniqueId: '[EditModeTests][D:/Software Projects/Personal Projects/DSAndAlgo_Unity/DSAndAlgo/Library/ScriptAssemblies/EditModeTests.dll][suite]'
     - id: 1006
       uniqueId: EditModeTests.dll/CustomArray2EditMode_Test/[EditModeTests][CustomArray2EditMode_Test.CustomArray2EditModeTestSimplePasses]
       name: CustomArray2EditModeTestSimplePasses
@@ -681,7 +681,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1005
       parentUniqueId: EditModeTests.dll/[EditModeTests][CustomArray2EditMode_Test][suite]
-    - id: 1005
+    - id: 1003
       uniqueId: EditModeTests.dll/[EditModeTests][CustomArray2EditModeTest][suite]
       name: CustomArray2EditModeTest
       fullName: CustomArray2EditModeTest
@@ -695,9 +695,9 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1007
-      parentUniqueId: '[EditModeTests][D:/UnityProjects/Personal/Projects/DSAndAlgo_Unity/DSAndAlgo/Library/ScriptAssemblies/EditModeTests.dll][suite]'
-    - id: 1006
+      parentId: 1009
+      parentUniqueId: '[EditModeTests][D:/Software Projects/Personal Projects/DSAndAlgo_Unity/DSAndAlgo/Library/ScriptAssemblies/EditModeTests.dll][suite]'
+    - id: 1004
       uniqueId: EditModeTests.dll/CustomArray2EditModeTest/[EditModeTests][CustomArray2EditModeTest.CustomArray2EditModeTestSimplePasses]
       name: CustomArray2EditModeTestSimplePasses
       fullName: CustomArray2EditModeTest.CustomArray2EditModeTestSimplePasses
@@ -712,7 +712,7 @@ MonoBehaviour:
       isSuite: 0
       categories:
       - Uncategorized
-      parentId: 1005
+      parentId: 1003
       parentUniqueId: EditModeTests.dll/[EditModeTests][CustomArray2EditModeTest][suite]
     - id: 1007
       uniqueId: EditModeTests.dll/[EditModeTests][QueueUsingStack_Test][suite]
@@ -729,7 +729,7 @@ MonoBehaviour:
       isSuite: 1
       categories: []
       parentId: 1009
-      parentUniqueId: '[EditModeTests][D:/UnityProjects/Personal/Projects/DSAndAlgo_Unity/DSAndAlgo/Library/ScriptAssemblies/EditModeTests.dll][suite]'
+      parentUniqueId: '[EditModeTests][D:/Software Projects/Personal Projects/DSAndAlgo_Unity/DSAndAlgo/Library/ScriptAssemblies/EditModeTests.dll][suite]'
     - id: 1008
       uniqueId: EditModeTests.dll/QueueUsingStack_Test/[EditModeTests][QueueUsingStack_Test.QueueUsingStackTESTSimplePasses]
       name: QueueUsingStackTESTSimplePasses
@@ -1005,7 +1005,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 3e3e0000
     m_LastClickedID: 15934
-    m_ExpandedIDs: 0000000076450000784500007a4500007c4500007e450000804500008245000084450000
+    m_ExpandedIDs: 000000007e45000080450000824500008445000086450000884500008a4500008c450000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1033,7 +1033,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000076450000784500007a4500007c4500007e450000804500008245000084450000
+    m_ExpandedIDs: 000000007e45000080450000824500008445000086450000884500008a4500008c450000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1127,22 +1127,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/DataStructuresAndAlgorithms/Scripts/Problems/Medium/Greedy
+    - Assets/DataStructuresAndAlgorithms/Scripts/Problems/Medium/StacksAndQueues
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/DataStructuresAndAlgorithms/Scripts/Problems/Medium/Greedy
+  - Assets/DataStructuresAndAlgorithms/Scripts/Problems/Medium/StacksAndQueues
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\Software Projects\Personal Projects\DSAndAlgo_Unity\DSAndAlgo
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 365}
-    m_SelectedIDs: c4450000
-    m_LastClickedID: 17860
-    m_ExpandedIDs: 0000000076450000784500007a4500007c4500007e45000080450000824500008445000000ca9a3b
+    m_SelectedIDs: d4450000
+    m_LastClickedID: 17876
+    m_ExpandedIDs: 000000007e45000080450000824500008445000086450000884500008a4500008c45000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1170,7 +1170,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000076450000784500007a4500007c4500007e450000804500008245000084450000
+    m_ExpandedIDs: 000000007e45000080450000824500008445000086450000884500008a4500008c450000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1214,7 +1214,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 15}
+      m_ClientGUIView: {fileID: 16}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -1257,7 +1257,7 @@ MonoBehaviour:
     m_CachedPref: 165
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 17882
+  m_LastInspectedObjectInstanceID: 17890
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_LockTracker:
@@ -1380,9 +1380,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: da450000
+      m_SelectedIDs: e2450000
       m_LastClickedID: 0
-      m_ExpandedIDs: 62fbffff
+      m_ExpandedIDs: 12fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1752,7 +1752,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 62480000
     m_LastClickedID: 18530
-    m_ExpandedIDs: 0000000076450000784500007a4500007c4500007e450000804500008245000084450000
+    m_ExpandedIDs: 000000007e45000080450000824500008445000086450000884500008a4500008c450000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1780,7 +1780,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000076450000784500007a4500007c4500007e450000804500008245000084450000
+    m_ExpandedIDs: 000000007e45000080450000824500008445000086450000884500008a4500008c450000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
