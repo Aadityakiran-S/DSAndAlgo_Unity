@@ -45,115 +45,102 @@ public class KthLargestIntegerInArray : MonoBehaviour
     //Use this to run
     private void Start()
     {
-        //_kthLargestResult = FindKthLargets_Optimal(_inputArray, _kValue);
-        QuickSort(_inputArray, 0, _inputArray.Length - 1);
+
     }
 
     #endregion
 
-    #region Methods	
+    #region Methods
 
-    private int FindKthLargest_Optimal(int[] nums, int k)
+    public int FindKthLargest_QuickSelect(int[] nums, int k)
     {
-        int indexToFind = nums.Length - k;
-        QuickSelect(nums, 0, nums.Length - 1, indexToFind);
-
-        return nums[indexToFind];
+        return QuickSelect(nums, 0, nums.Length - 1, nums.Length - k);
     }
 
-    //TODO: Implement this
-    private int FindKthLargest_UsingPriorityQueue(int[] nums, int k)
+    public int FindKthLargest_QuickSort(int[] nums, int k)
     {
-        //Just dump it all in a priority queue
-        //Then retrieve the kth if maxHeap or (nums.Count - k)th if minHeap
-         
-        return 0;
-    }
-
-    private int FindKthLargest_SubOptimal(int[] nums, int k)
-    {
-        //Simply looking at the kth element from the end after sorting the array
-        int indexToFind = nums.Length - k;
         QuickSort(nums, 0, nums.Length - 1);
-
-        return nums[indexToFind];
+        return nums[nums.Length - k];
     }
+
+    //public int FindKthLargest_PriorityQueue(int[] nums, int k)
+    //{
+    //    PriorityQueue<int, int> minHeap = new(); //By default minHeap behaviour
+
+    //    //Dump everything into PQ but when elements cross k count, just pop the least one out
+    //    foreach (int num in nums)
+    //    {
+    //        minHeap.Enqueue(num, num);
+    //        if (minHeap.Count > k)
+    //        {
+    //            minHeap.Dequeue();
+    //        }
+    //    }
+
+    //    return minHeap.Peek();
+    //}
 
     #endregion
 
     #region Auxilliary Functions
 
-    int QuickSelect(int[] nums, int left, int right, int indexToFind)
+    private void QuickSort(int[] nums, int l, int r)
     {
-        if (left < right)
+        //Base case
+        if (l >= r)
         {
-            int partitionIndex = FindPartition(nums, left, right);
-
-            if (partitionIndex == indexToFind)
-            {
-                return nums[partitionIndex];
-            }
-            else if (indexToFind < partitionIndex) //Move to left sub array
-            {
-                QuickSelect(nums, left, partitionIndex - 1, indexToFind);
-            }
-            else //Move to right sub array
-            {
-                QuickSelect(nums, partitionIndex + 1, right, indexToFind);
-            }
+            return;
         }
 
-        return default;
-    }
+        int pivot = nums[r]; int p = l;
 
-    int FindPartition(int[] nums, int left, int right)
-    {
-        int pivotElement = nums[right];
-        int partitionIndex = left;
-
-        for (int i = left; i < right; i++)
+        for (int i = l; i < r; i++)
         {
-            if(nums[i] < pivotElement)
+            if (nums[i] <= pivot)
             {
-                Swap(i, partitionIndex, nums);
-                partitionIndex++;
+                Swap(nums, i, p);
+                p++;
             }
         }
+        Swap(nums, p, r);
 
-        Swap(partitionIndex, right, nums);
-        return partitionIndex;
+        QuickSort(nums, p + 1, r);
+        QuickSort(nums, l, p - 1);
     }
 
-    void QuickSort(int[] inputArray, int left, int right)
+    private int QuickSelect(int[] nums, int l, int r, int k)
     {
-        //Exit condition: Left should always be greater than right. If they are same also no need to sort
-        if (left >= right) return;
+        int pivot = nums[r]; int p = l;
 
-        //Pivoting off the extreme right value
-        int pivotIndex = right, i = left, j = left;
-
-        while (j < pivotIndex)
+        //Finding partition by finding right place for pivot (r)
+        for (int i = l; i < r; i++)
         {
-            //Iterating and putting all things left of eventual pivot's position less than it and
-            if (inputArray[j] >= inputArray[pivotIndex])
+            if (nums[i] <= pivot)
             {
-                j++;
-            }
-            else //Everything to the right greater than it.
-            {
-                Swap(i, j, inputArray);
-                i++; j++;
+                Swap(nums, i, p);
+                p++;
             }
         }
+        Swap(nums, p, r); //Swapping pivot with currnt position of p
 
-        Swap(i, pivotIndex, inputArray); //Swapping i with end to put pivot in it's final place
-
-        //Calling quick sort on each sub array
-        QuickSort(inputArray, left, i - 1); //Left sub array
-        QuickSort(inputArray, i + 1, right); //Right sub array
+        //Partition further to right
+        if (k > p)
+        {
+            return QuickSelect(nums, p + 1, r, k);
+        }
+        //Partitin further to left
+        else if (k < p)
+        {
+            return QuickSelect(nums, l, p - 1, k);
+        }
+        //Partition reached
+        else
+        {
+            return nums[p];
+        }
     }
 
-    void Swap(int i, int j, int[] input)
+    void Swap(int[] input, int i, int j)
     {
         int I = input[i]; int J = input[j];
 
