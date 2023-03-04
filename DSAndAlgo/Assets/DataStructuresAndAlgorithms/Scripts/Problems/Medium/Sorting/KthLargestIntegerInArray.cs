@@ -80,6 +80,149 @@ public class KthLargestIntegerInArray : MonoBehaviour
     //    return minHeap.Peek();
     //}
 
+    #region Kth Largest using custom MinHeap implementation
+
+    public int FindKthLargest_MinHeap(int[] nums, int k)
+    {
+        MinHeap minHeap = new MinHeap();
+
+        //Dump everything into PQ but when elements cross k count, just pop the least one out
+        foreach (int num in nums)
+        {
+            minHeap.Enqueue(num);
+            if (minHeap.Count > k)
+            {
+                minHeap.Dequeue();
+            }
+        }
+
+        return minHeap.Peek();
+    }
+
+
+    #region MinHeap implementation
+
+    public class MinHeap
+    {
+        #region References and Constructor
+
+        private List<int> _minHeap;
+        public int Count => _minHeap.Count;
+
+        public MinHeap()
+        {
+            _minHeap = new List<int>();
+        }
+
+        #endregion
+
+        #region Public functions
+
+        //For debugging purposes
+        public void PrintAllValues()
+        {
+            foreach (int entry in _minHeap)
+            {
+                Console.WriteLine("entry: " + entry);
+            }
+        }
+
+        public int Peek()
+        {
+            return _minHeap[0];
+        }
+
+        public void Enqueue(int entry)
+        {
+            //Taking entry, putting it at the end and taking it's parent
+            _minHeap.Add(entry);
+            int i = _minHeap.Count - 1; int p = _minHeap[(int)Math.Truncate((float)(i - 1) / 2)];
+            //Comparing parents till next parent is less than our entry
+            while (p > entry)
+            {
+                this.Swap(_minHeap, i, (int)Math.Truncate((float)(i - 1) / 2));
+                i = (int)Math.Truncate((float)(i - 1) / 2); p = _minHeap[(int)Math.Truncate((float)(i - 1) / 2)];
+            }
+        }
+
+        public int? Dequeue()
+        {
+            if (_minHeap.Count == 0)
+            {
+                return null;
+            }
+
+            //Popping first and putting last in it's place
+            int output = _minHeap[0]; _minHeap.RemoveAt(0); //Caching and removing first
+            int last = _minHeap[_minHeap.Count - 1]; //Displacing last from last to front
+            _minHeap.RemoveAt(_minHeap.Count - 1); _minHeap.Insert(0, last);
+
+            int i = 0; //Finding correct place of now brought to front last element
+            while (i < _minHeap.Count)
+            {
+                //Setting kids and their values
+                int left = (2 * i) + 1; int right = (2 * i) + 2;
+                int? leftValue = null; int? rightValue = null;
+
+                //If kid indices are within bounds, give corresponding values to them
+                if (left < _minHeap.Count)
+                {
+                    leftValue = _minHeap[left];
+                }
+                if (right < _minHeap.Count)
+                {
+                    rightValue = _minHeap[right];
+                }
+
+                //Set to replace index
+                int toReplaceIndex = -1;
+
+                //If both kids are out of bounds, i has already found it's place
+                if (leftValue == null && rightValue == null)
+                {
+                    break;
+                }
+                //If both are in bounds, need to replace min child (left or right)
+                if (leftValue != null && rightValue != null)
+                {
+                    toReplaceIndex = (leftValue < rightValue) ? left : right;
+                }
+                //If only one is in bounds, then we need to replace that 
+                else
+                {
+                    toReplaceIndex = (leftValue == null) ? right : left;
+                }
+
+                //If child to replace is greater than i, then i has already found it's acutal place
+                if (_minHeap[toReplaceIndex] >= _minHeap[i])
+                {
+                    break;
+                }
+                //if found appropriate child to replace, we swap with existing
+                else
+                {
+                    Swap(_minHeap, i, toReplaceIndex); i = toReplaceIndex;
+                }
+            }
+
+            return output;
+        }
+
+        #endregion
+
+        #region Helper functions
+        private void Swap(List<int> input, int i, int j)
+        {
+            int iEntry = input[i]; int jEntry = input[j];
+            input[i] = jEntry; input[j] = iEntry;
+        }
+        #endregion
+    }
+
+    #endregion
+    
+    #endregion
+
     #endregion
 
     #region Auxilliary Functions
