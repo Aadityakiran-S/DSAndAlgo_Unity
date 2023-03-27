@@ -40,12 +40,75 @@ public class ReverseGivenSinglyLinkedList : MonoBehaviour
         Debug.LogWarning("Printing AFTER reversal");
 		_linkedList.PrintAllElements();
     }
-	
-	#endregion
-	
-	#region Methods	
-	
-	private void ReverseLinkedList_Iteratively(SinglyLinkedList list)
+
+    #endregion
+
+    #region LeetCode solution
+
+    #region Question Link
+    //https://leetcode.com/problems/reverse-linked-list/description/
+    #endregion
+
+    #region Iterative Solution
+
+    public ListNode ReverseList_Iterative(ListNode head)
+    {
+        ListNode curr = head; ListNode newHead = null; ListNode prev = null;
+        while (curr != null)
+        {
+
+            if (curr.next == null)
+            {
+                newHead = curr;
+            }
+
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr; curr = next;
+        }
+
+        return newHead;
+    }
+
+    #endregion
+
+    #region Recursive Solution
+
+    public ListNode newHead;
+
+    public ListNode ReverseList_Recursive(ListNode head)
+    {
+        newHead = null;
+        ReverseList_Recursive_Internal(head, null);
+
+        return newHead;
+    }
+
+    private void ReverseList_Recursive_Internal(ListNode curr, ListNode prev)
+    {
+        if (curr == null)
+        {
+            return;
+        }
+
+        if (curr.next == null)
+        {
+            newHead = curr;
+        }
+
+        ListNode next = curr.next;
+        curr.next = prev;
+
+        ReverseList_Recursive_Internal(next, curr);
+    }
+
+    #endregion
+
+    #endregion
+
+    #region Methods	
+
+    private void ReverseLinkedList_Iteratively(SinglyLinkedList list)
     {
 		if(list.head == null)
         {
