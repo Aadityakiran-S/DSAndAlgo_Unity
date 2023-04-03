@@ -5,22 +5,22 @@ using System.Collections.Generic;
 
 public class PascalsTriangle : MonoBehaviour
 {
-	#region Question
-	
-	
+    #region Question
 
-	#endregion
+    //https://leetcode.com/problems/pascals-triangle/
 
-	#region References
-	
-	
-	
-	#endregion
-	
-	#region UnityLifecycle
-	
-	//Use this to initialize
-	private void Awake()
+    #endregion
+
+    #region References
+
+
+
+    #endregion
+
+    #region UnityLifecycle
+
+    //Use this to initialize
+    private void Awake()
 	{
 	
 	}	
