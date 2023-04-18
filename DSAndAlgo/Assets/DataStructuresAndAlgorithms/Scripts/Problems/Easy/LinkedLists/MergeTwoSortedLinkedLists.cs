@@ -34,6 +34,34 @@ public class MergeTwoSortedLinkedLists : MonoBehaviour
     #endregion
 
     #region Methods
+
+    public ListNode MergeTwoLists_Recursive(ListNode h1, ListNode h2)
+    {
+        if (h1 == null || h2 == null)
+        {
+            return (h1 == null) ? h2 : h1;
+        }
+
+        ListNode prev = null; ListNode toRet = null;
+        if (h1.val <= h2.val)
+        {
+            toRet = h1; h1 = h1.next;
+        }
+        else
+        {
+            toRet = h2; h2 = h2.next;
+        }
+        prev = toRet;
+
+        Console.WriteLine("PrevVal: " + prev.val);
+        Console.WriteLine(" ");
+
+        MergeTwoLists_Recursive_Internal(h1, h2, prev);
+        // prev.next = (h1 == null)? h2 : h1;
+
+        return toRet;
+    }    
+
     public ListNode MergeTwoLists(ListNode h1, ListNode h2)
     {
         //Edge cases: (1) Both are null => Return either
@@ -96,6 +124,34 @@ public class MergeTwoSortedLinkedLists : MonoBehaviour
         tail.next = (h1 == null) ? h2 : h1;
 
         return head.next; //First entry is null to prevent entering into null list
+    }
+
+    #endregion
+
+    #region Private Methods
+
+    private void MergeTwoLists_Recursive_Internal(ListNode h1, ListNode h2, ListNode prev)
+    {
+        if (h1 == null || h2 == null)
+        {
+            prev.next = (h1 == null) ? h2 : h1;
+            return;
+        }
+
+        if (h1.val <= h2.val)
+        {
+            prev.next = h1;
+            h1 = h1.next;
+        }
+        else
+        {
+            prev.next = h2;
+            h2 = h2.next;
+        }
+
+        Console.WriteLine("Prev: " + prev.val);
+
+        MergeTwoLists_Recursive_Internal(h1, h2, prev.next);
     }
 
     #endregion
