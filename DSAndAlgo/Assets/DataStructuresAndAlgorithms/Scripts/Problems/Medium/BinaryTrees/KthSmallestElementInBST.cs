@@ -33,6 +33,34 @@ public class KthSmallestElementInBST : MonoBehaviour
 
 	#endregion
 
+	#region O(k) time complexity and no additional space solution
+
+	public int KthSmallest_UsingRef(TreeNode root, int k)
+	{
+		var num = 0; TreeNode res = null;
+		Inorder(root, k, ref num, ref res);
+
+		return res.val;
+	}
+
+	private void Inorder(TreeNode root, int k, ref int num, ref TreeNode res)
+	{
+		if (root == null || res != null) return;
+
+		Inorder(root.left, k, ref num, ref res);
+
+		num += 1;
+		if (num == k)
+		{
+			res = root;
+			return;
+		}
+
+		Inorder(root.right, k, ref num, ref res);
+	}
+
+	#endregion
+
 	#region Recursive Method	
 
 	public int KthSmallest_Recursive(TreeNode root, int k)
