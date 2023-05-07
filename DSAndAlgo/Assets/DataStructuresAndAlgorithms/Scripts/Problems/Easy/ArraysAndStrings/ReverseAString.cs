@@ -52,6 +52,20 @@ public class ReverseAString : MonoBehaviour
 		}
 	}
 
+	public void ReverseString_Iterative_1(char[] s)
+	{
+		int m = (int)Math.Floor((decimal)s.Length / 2);
+		for (int i = 0; i < s.Length; i++)
+		{
+			if (i >= m)
+			{
+				break;
+			}
+
+			Swap(s,i, (s.Length - 1) - i);
+		}
+	}
+
 	#endregion
 
 	#region Helper Methods	
