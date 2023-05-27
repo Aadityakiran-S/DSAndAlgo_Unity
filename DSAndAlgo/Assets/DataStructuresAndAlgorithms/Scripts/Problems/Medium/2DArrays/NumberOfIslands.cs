@@ -6,66 +6,10 @@ using System.Collections.Generic;
 public class NumberOfIslands : MonoBehaviour
 {
     #region Question
-    //Question Link: https://leetcode.com/problems/number-of-islands/
-
-    //Given an m x n 2D binary grid grid which represents a map of '1's(land) and '0's(water), return the number of islands.
-    //An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.
-    //You may assume all four edges of the grid are all surrounded by water.
-
-    //Example 1:
-
-    //Input: grid = [
-    //  ["1", "1", "1", "1", "0"],
-    //  ["1","1","0","1","0"],
-    //  ["1","1","0","0","0"],
-    //  ["0","0","0","0","0"]
-    //]
-
-    //Output: 1
-
-    //Example 2:
-
-    //Input: grid = [
-    //  ["1","1","0","0","0"],
-    //  ["1","1","0","0","0"],
-    //  ["0","0","1","0","0"],
-    //  ["0","0","0","1","1"]
-    //]
-
-    //Output: 3
-
-
-    //Constraints:
-
-    //m == grid.length
-    //n == grid[i].length
-    //1 <= m, n <= 300
-    //grid[i][j] is '0' or '1'.
+    //Question Link: https://leetcode.com/problems/number-of-islands/    
     #endregion
 
-    #region References
-
-
-
-    #endregion
-
-    #region UnityLifecycle
-
-    //Use this to initialize
-    private void Awake()
-    {
-
-    }
-
-    //Use this to run
-    private void Start()
-    {
-
-    }
-
-    #endregion
-
-    #region Methods	
+    #region Solution 1 (BFS method)    
 
     private int NumIslands(char[][] grid)
     {
@@ -79,7 +23,7 @@ public class NumberOfIslands : MonoBehaviour
                 if (grid[row][column] == 1) //If we encounter land, 
                 {
                     //Eliminate all land attached to it so that we don't recount islands
-                    TraverseBFSToClearAllConnectedLand(grid, row, column); 
+                    TraverseBFSToClearAllConnectedLand(grid, row, column);
                     count++; //Increment island count
                 }
             }
@@ -87,10 +31,6 @@ public class NumberOfIslands : MonoBehaviour
 
         return count;
     }
-
-    #endregion
-
-    #region Auxilliary Functions
 
     void TraverseBFSToClearAllConnectedLand(char[][] grid, int row, int column)
     {
@@ -141,6 +81,57 @@ public class NumberOfIslands : MonoBehaviour
             }
         }
     }
+
+    #endregion
+
+    #region Solution 2 (BFS using Tuple)
+
+    //(int row, int column)[] dir = new[]{
+    //    (-1, 0), (0, -1), (1, 0), (0, 1)
+    //};
+    //bool[,] seen;
+
+    //public int NumIslands_UsingTuple(char[][] grid)
+    //{
+    //    int m = grid.Length; int n = grid[0].Length; seen = new bool[m, n];
+    //    int numberOfIslands = 0;
+    //    for (int i = 0; i < m; i++)
+    //    {
+    //        for (int j = 0; j < n; j++)
+    //        {
+    //            if (grid[i][j] == '1' && !seen[i, j])
+    //            {
+    //                Explore(new(i, j), grid);
+    //                numberOfIslands++;
+    //            }
+    //        }
+    //    }
+    //    return numberOfIslands;
+    //}
+
+    //void Explore((int row, int col) currentIsland, char[][] grid)
+    //{
+    //    Queue<(int row, int col)> bfsQ = new(); bfsQ.Enqueue(currentIsland);
+    //    int m = grid.Length; int n = grid[0].Length;
+
+    //    while (bfsQ.Count > 0)
+    //    {
+    //        (int row, int col) curr = bfsQ.Dequeue();
+    //        seen[curr.row, curr.col] = true; //Marking current land as visited
+
+    //        //Checking all 4 directions we could go from current land
+    //        foreach ((int row, int col) entry in dir)
+    //        {
+    //            (int row, int col) dir2Go = new(entry.row + curr.row, entry.col + curr.col);
+    //            //dir2Go is within bounds and an unexplored piece of land
+    //            if (dir2Go.row >= 0 && dir2Go.col >= 0 && dir2Go.row < m && dir2Go.col < n &&
+    //                seen[dir2Go.row, dir2Go.col] == false && grid[dir2Go.row][dir2Go.col] == '1')
+    //            {
+    //                bfsQ.Enqueue(dir2Go); //Add to queue for continued exploration 
+    //            }
+    //        }
+    //    }
+    //}
 
     #endregion
 }

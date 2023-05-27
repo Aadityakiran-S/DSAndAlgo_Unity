@@ -9,39 +9,11 @@ public class #SCRIPTNAME# : MonoBehaviour
 	
 	
 
-	#endregion
-
-	#region References
+	#endregion		
 	
+	#region Methods		
 	
-	
-	#endregion
-	
-	#region UnityLifecycle
-	
-	//Use this to initialize
-	private void Awake()
-	{
-	
-	}	
-	
-	//Use this to run
-	private void Start()
-    {
-        
-    }
-	
-	#endregion
-	
-	#region Methods	
-	
-	
-	
-	#endregion
-
-	#region Helper Methods	
-	
-	
+		
 	
 	#endregion
 }
