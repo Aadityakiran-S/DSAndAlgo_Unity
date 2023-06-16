@@ -11,31 +11,10 @@ public class MinInRotatedSortedArray : MonoBehaviour
 
 	#endregion
 
-	#region References
-
-
-
-	#endregion
-
-	#region UnityLifecycle
-
-	//Use this to initialize
-	private void Awake()
-	{
-	
-	}	
-	
-	//Use this to run
-	private void Start()
-    {
-        
-    }
-
-	#endregion
 
 	#region Methods	
 
-	public int FindMin(int[] nums)
+	public int FindMin_1(int[] nums)
 	{
 
 		int left = 0, right = nums.Length - 1; int result = nums[0];
@@ -69,11 +48,28 @@ public class MinInRotatedSortedArray : MonoBehaviour
 		return 0;
 	}
 
-	#endregion
+	public int FindMin_2(int[] nums)
+	{
+		int l = 0; int r = nums.Length - 1;
+		while (nums[l] > nums[r])
+		{
+			int m = l + (r - l) / 2;
 
-	#region Helper Methods	
+			//Split occured btw l and r
+			if (nums[l] > nums[r])
+			{
+				//Split occured before mid
+				if (nums[m] < nums[r])
+				{
+					r = m;
+				}
+				//Split occured after mid
+				else l = m + 1;
+			}
+		}
 
-
+		return nums[l];
+	}
 
 	#endregion
 }
